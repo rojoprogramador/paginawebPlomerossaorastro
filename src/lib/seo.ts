@@ -4,7 +4,7 @@
 export const SITE = {
   name:        'Plomeros SAOR',
   tagline:     'Servicios locativos de calidad',
-  url:         import.meta.env.PUBLIC_SITE_URL || 'https://www.plomerossaor.com',
+  url:         'https://www.plomerossaor.com',
   phone1:      '+573185922585',
   phone2:      '+573007750833',
   whatsapp:    '573185922585',
