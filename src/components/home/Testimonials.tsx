@@ -257,19 +257,29 @@ export default function Testimonials() {
                 onClick={() => goTo(i)}
                 aria-label={`Testimonio ${i + 1}`}
                 style={{
-                  width:           8,
-                  height:          8,
-                  borderRadius:    4,
-                  background:      '#00B4D8',
-                  opacity:         i === current ? 1 : 0.25,
-                  transform:       i === current ? 'scaleX(3)' : 'scaleX(1)',
-                  transformOrigin: 'left center',
-                  border:          'none',
-                  cursor:          'pointer',
-                  transition:      'transform 0.3s ease, opacity 0.3s ease',
-                  padding:         0,
+                  padding:    '8px',
+                  background: 'none',
+                  border:     'none',
+                  cursor:     'pointer',
+                  display:    'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
-              />
+              >
+                <span
+                  style={{
+                    display:         'block',
+                    width:           8,
+                    height:          8,
+                    borderRadius:    4,
+                    background:      '#00B4D8',
+                    opacity:         i === current ? 1 : 0.25,
+                    transform:       i === current ? 'scaleX(3)' : 'scaleX(1)',
+                    transformOrigin: 'left center',
+                    transition:      'transform 0.3s ease, opacity 0.3s ease',
+                  }}
+                />
+              </button>
             ))}
 
             <button
