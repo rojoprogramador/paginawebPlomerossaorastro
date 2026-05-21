@@ -7,7 +7,17 @@
       "PowerShell(Copy-Item \"C:\\\\Users\\\\User\\\\Desktop\\\\WebPlomerossaorAstro\\\\src\\\\assets\\\\imagenesdeapoyo\\\\caroempresaplomerossaor.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\WebPlomerossaorAstro\\\\src\\\\assets\\\\team\\\\carro-empresa-saor.png\" -Force)",
       "Bash(git init *)",
       "Bash(git branch *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(npm install *)",
+      "Bash(git commit *)",
+      "Bash(python -c \"from PIL import Image; img = Image.open\\('c:/Users/User/Desktop/WebPlomerossaorAstro/public/images/logo/logo-plomeros-saor.png'\\); print\\(img.size\\)\")",
+      "Bash(python3 -c \"from PIL import Image; img = Image.open\\('c:/Users/User/Desktop/WebPlomerossaorAstro/public/images/logo/logo-plomeros-saor.png'\\); print\\(img.size\\)\")",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\('c:\\\\Users\\\\User\\\\Desktop\\\\WebPlomerossaorAstro\\\\public\\\\images\\\\logo\\\\logo-plomeros-saor.png'\\); Write-Output \"$\\($img.Width\\)x$\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "Bash(ls public/favicon.svg)",
+      "Bash(ls public/images/favicon.svg)"
     ]
   }
 }
