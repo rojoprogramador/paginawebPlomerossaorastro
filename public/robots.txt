@@ -4,4 +4,4 @@ Allow: /
 # Bloquear acceso a la API
 Disallow: /api/
 
-Sitemap: https://www.plomerossaor.com/sitemap.xml
+Sitemap: https://www.plomerossaor.com/sitemap-index.xml
