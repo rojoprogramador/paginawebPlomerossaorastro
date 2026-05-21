@@ -124,7 +124,7 @@ import imgLogo from '../../assets/logo-plomeros-saor.png';
     top: 0;
     left: 0;
     right: 0;
-    z-index: 100;
+    z-index: 1000;
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -401,10 +401,13 @@ import imgLogo from '../../assets/logo-plomeros-saor.png';
     .navbar-cta { display: none; }
     .hamburger { display: flex; }
     .mobile-menu { display: block; }
+    .navbar-inner { gap: 0.75rem; }
+    .navbar-logo-img { height: 48px; }
   }
 
-  @media (max-width: 480px) {
-    .brand-tagline { display: none; }
+  @media (max-width: 400px) {
+    .navbar-logo-img { height: 40px; }
+    .navbar-inner { gap: 0.5rem; }
   }
 </style>
 
