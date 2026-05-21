@@ -1,0 +1,151 @@
+---
+// src/components/home/StatsCounter.astro
+// Contador animado — vanilla JS, sin React
+
+const STATS = [
+  { value: 6,   suffix: '+', label: 'Años de experiencia',     icon: '🏆', prefix: '' },
+  { value: 200, suffix: '+', label: 'Clientes satisfechos',     icon: '😊', prefix: '' },
+  { value: 1,   suffix: 'h', label: 'Tiempo de respuesta',      icon: '⚡', prefix: '<' },
+  { value: 100, suffix: '%', label: 'Garantía en los trabajos', icon: '✅', prefix: '' },
+];
+---
+
+<section class="stats-section" id="stats-section">
+  <div class="container">
+    <!-- Título -->
+    <div class="stats-header">
+      <span class="stats-badge">Por qué elegirnos</span>
+      <h2 class="stats-title">
+        Números que hablan <span style="color:#00B4D8">por sí solos</span>
+      </h2>
+    </div>
+
+    <!-- Grid -->
+    <div class="stats-grid">
+      {STATS.map((stat, i) => (
+        <div class="stat-card" style={`transition-delay:${i * 0.1}s`}>
+          <div class="stat-icon">{stat.icon}</div>
+          <div
+            class="stat-value"
+            data-to={stat.value}
+            data-prefix={stat.prefix}
+            data-suffix={stat.suffix}
+          >
+            {stat.prefix}{stat.value}{stat.suffix}
+          </div>
+          <div class="stat-label">{stat.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const section = document.getElementById('stats-section');
+  let started = false;
+
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting || started) return;
+    started = true;
+
+    section?.querySelectorAll<HTMLElement>('.stat-card').forEach(card => {
+      card.classList.add('in-view');
+    });
+
+    section?.querySelectorAll<HTMLElement>('.stat-value').forEach(el => {
+      const to       = Number(el.dataset.to);
+      const prefix   = el.dataset.prefix ?? '';
+      const suffix   = el.dataset.suffix ?? '';
+      const duration = 1500;
+      const t0       = performance.now();
+
+      const tick = (now: number) => {
+        const p     = Math.min((now - t0) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = prefix + Math.round(to * eased) + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+  }, { rootMargin: '-80px' });
+
+  if (section) observer.observe(section);
+</script>
+
+<style>
+  .stats-section {
+    background: linear-gradient(135deg, #0B2240 0%, #0f3460 50%, #1565C0 100%);
+    padding: 5rem 0;
+  }
+
+  .stats-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .stats-badge {
+    display: inline-block;
+    background: rgba(0,180,216,0.15);
+    border: 1px solid rgba(0,180,216,0.4);
+    color: #4FC3F7;
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .stats-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 2rem 1.5rem;
+    background: rgba(255,255,255,0.06);
+    border-radius: 1.25rem;
+    border: 1px solid rgba(0,180,216,0.15);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .stat-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+
+  .stat-value {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    color: #00B4D8;
+    line-height: 1;
+    margin-bottom: 0.375rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+</style>

@@ -2,6 +2,7 @@
 // src/pages/blog-plomeros-en-cali/[slug].astro
 // Post individual de blog — schema Article + BreadcrumbList
 // GTM: scroll depth tracking via tag en Layout
+export const prerender = true;
 
 import Layout from '../../layouts/Layout.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';

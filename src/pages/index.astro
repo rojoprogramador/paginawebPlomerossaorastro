@@ -6,9 +6,9 @@ export const prerender = true;
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/home/Hero.astro';
 import ServicesGrid from '../components/home/ServicesGrid.astro';
-import StatsCounter from '../components/home/StatsCounter';
+import StatsCounter from '../components/home/StatsCounter.astro';
 import WhyUs from '../components/home/WhyUs.astro';
-import Testimonials from '../components/home/Testimonials';
+import Testimonials from '../components/home/Testimonials.astro';
 import AreasCoverage from '../components/home/AreasCoverage.astro';
 import CTAEmergency from '../components/home/CTAEmergency.astro';
 import { SITE, buildTitle } from '../lib/seo';
@@ -63,14 +63,14 @@ const homeSchema = {
   <!-- Grid de servicios -->
   <ServicesGrid />
 
-  <!-- Contador de estadísticas (Island) -->
-  <StatsCounter client:visible />
+  <!-- Contador de estadísticas -->
+  <StatsCounter />
 
   <!-- Por qué elegirnos -->
   <WhyUs />
 
-  <!-- Testimonios (Island carousel) -->
-  <Testimonials client:visible />
+  <!-- Testimonios carousel -->
+  <Testimonials />
 
   <!-- Zonas de cobertura -->
   <AreasCoverage />

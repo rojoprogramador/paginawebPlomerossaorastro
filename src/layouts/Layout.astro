@@ -5,7 +5,7 @@
 import '../styles/global.css';
 import Navbar from '../components/layout/Navbar.astro';
 import Footer from '../components/layout/Footer.astro';
-import WhatsAppButton from '../components/layout/WhatsAppButton';
+import WhatsAppButton from '../components/layout/WhatsAppButton.astro';
 import { SITE, getLocalBusinessSchema } from '../lib/seo';
 import type { PageSEO } from '../lib/seo';
 
@@ -127,7 +127,7 @@ const GADS_ID = 'AW-17162213345';
 
   <Footer />
 
-  <!-- WhatsApp flotante — Island React con animación pulse -->
-  <WhatsAppButton client:idle />
+  <!-- WhatsApp flotante -->
+  <WhatsAppButton />
 </body>
 </html>

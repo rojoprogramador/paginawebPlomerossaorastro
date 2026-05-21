@@ -1,0 +1,323 @@
+---
+// src/components/home/Testimonials.astro
+// Carousel de testimonios — vanilla JS, sin React
+
+const TESTIMONIALS = [
+  {
+    name: 'Carlos Rodríguez',
+    zone: 'Ciudad Jardín, Cali',
+    rating: 5,
+    text: 'Excelente servicio. Tenía una fuga oculta en el piso y con el geófono la encontraron en minutos, sin romper nada. Muy profesionales y rápidos.',
+    service: 'Detección con geófono',
+    avatar: 'CR',
+  },
+  {
+    name: 'María González',
+    zone: 'Unicentro, Cali',
+    rating: 5,
+    text: 'La cámara térmica es increíble. Encontraron la fuga detrás de la pared sin necesidad de romperla. Me ahorraron una fortuna. 100% recomendados.',
+    service: 'Cámara térmica',
+    avatar: 'MG',
+  },
+  {
+    name: 'Andrés Ospina',
+    zone: 'Jamundí',
+    rating: 5,
+    text: 'Atendieron una emergencia de destape a las 11pm. Llegaron en 40 minutos y resolvieron todo. El precio fue muy justo. Gracias Plomeros SAOR!',
+    service: 'Destape de emergencia',
+    avatar: 'AO',
+  },
+  {
+    name: 'Lucia Caicedo',
+    zone: 'Palmira',
+    rating: 5,
+    text: 'Contratamos para remodelar el baño principal y quedó espectacular. Trabajo limpio, puntual y con garantía. Ya los recomendé a todos mis vecinos.',
+    service: 'Remodelación de baño',
+    avatar: 'LC',
+  },
+  {
+    name: 'Roberto Muñoz',
+    zone: 'Yumbo',
+    rating: 5,
+    text: 'Mi factura de agua estaba por las nubes. En una hora encontraron la fuga y la repararon. Al mes siguiente la factura volvió a la normalidad.',
+    service: 'Detección de fugas',
+    avatar: 'RM',
+  },
+];
+
+const STARS = Array.from({ length: 5 });
+---
+
+<section class="t-section">
+  <div class="container">
+    <!-- Título -->
+    <div class="t-header">
+      <span class="t-badge">⭐ 4.9 / 5 — 47 reseñas</span>
+      <h2 class="t-title">
+        Lo que dicen nuestros <span style="color:#1565C0">clientes</span>
+      </h2>
+    </div>
+
+    <!-- Carousel -->
+    <div class="t-carousel">
+      <!-- Cards (todas en DOM, stacked via CSS grid) -->
+      <div class="t-track">
+        {TESTIMONIALS.map((t, i) => (
+          <article class={`t-card${i === 0 ? ' is-active' : ''}`} data-index={i} aria-hidden={i !== 0 ? 'true' : 'false'}>
+            <!-- Comilla decorativa -->
+            <span class="t-quote" aria-hidden="true">"</span>
+
+            <!-- Estrellas -->
+            <div class="t-stars">
+              {STARS.map((_, si) => (
+                <svg width="16" height="16" viewBox="0 0 24 24" fill={si < t.rating ? '#F59E0B' : '#E5E7EB'} aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              ))}
+            </div>
+
+            <p class="t-text">"{t.text}"</p>
+
+            <div class="t-author">
+              <div class="t-avatar" aria-hidden="true">{t.avatar}</div>
+              <div>
+                <div class="t-name">{t.name}</div>
+                <div class="t-meta">{t.zone} · {t.service}</div>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- Controles -->
+      <div class="t-controls">
+        <button id="t-prev" aria-label="Testimonio anterior" class="t-nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="m15 18-6-6 6-6"/>
+          </svg>
+        </button>
+
+        {TESTIMONIALS.map((_, i) => (
+          <button
+            class={`t-dot${i === 0 ? ' is-active' : ''}`}
+            data-index={i}
+            aria-label={`Testimonio ${i + 1}`}
+          >
+            <span></span>
+          </button>
+        ))}
+
+        <button id="t-next" aria-label="Siguiente testimonio" class="t-nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+            <path d="m9 18 6-6-6-6"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const cards   = Array.from(document.querySelectorAll<HTMLElement>('.t-card'));
+  const dots    = Array.from(document.querySelectorAll<HTMLElement>('.t-dot'));
+  const total   = cards.length;
+  let current   = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function goTo(index: number) {
+    cards[current].classList.remove('is-active');
+    cards[current].setAttribute('aria-hidden', 'true');
+    dots[current].classList.remove('is-active');
+
+    current = index;
+
+    cards[current].classList.add('is-active');
+    cards[current].setAttribute('aria-hidden', 'false');
+    dots[current].classList.add('is-active');
+  }
+
+  function advance() { goTo((current + 1) % total); }
+
+  function resetTimer() {
+    clearInterval(timer);
+    timer = setInterval(advance, 5000);
+  }
+
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
+  document.getElementById('t-prev')?.addEventListener('click', () => { goTo((current - 1 + total) % total); resetTimer(); });
+  document.getElementById('t-next')?.addEventListener('click', () => { goTo((current + 1) % total); resetTimer(); });
+
+  timer = setInterval(advance, 5000);
+</script>
+
+<style>
+  .t-section {
+    padding: 5rem 0;
+    background: var(--color-bg-light, #F0F7FA);
+  }
+
+  .t-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .t-badge {
+    display: inline-block;
+    background: rgba(0,180,216,0.1);
+    border: 1px solid rgba(0,180,216,0.3);
+    color: #0B2240;
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .t-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 800;
+    color: #0B2240;
+    line-height: 1.2;
+  }
+
+  /* Track: CSS grid stacking */
+  .t-track {
+    display: grid;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* All cards stacked in the same cell */
+  .t-card {
+    grid-area: 1 / 1;
+    background: white;
+    border-radius: 1.25rem;
+    padding: 2.5rem;
+    box-shadow: 0 8px 32px rgba(11,34,64,0.1);
+    border: 1px solid rgba(0,180,216,0.08);
+    position: relative;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .t-card.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+  }
+
+  /* Decorative quote */
+  .t-quote {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 5rem;
+    line-height: 1;
+    color: rgba(0,180,216,0.08);
+    font-family: Georgia, serif;
+    user-select: none;
+  }
+
+  .t-stars {
+    display: flex;
+    gap: 3px;
+  }
+
+  .t-text {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: #374151;
+    margin: 1.25rem 0;
+    font-style: italic;
+  }
+
+  .t-author {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .t-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00B4D8, #1565C0);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 0.875rem;
+    flex-shrink: 0;
+  }
+
+  .t-name {
+    font-weight: 700;
+    color: #0B2240;
+    font-size: 0.9375rem;
+  }
+
+  .t-meta {
+    font-size: 0.8125rem;
+    color: #64748B;
+  }
+
+  /* Controls */
+  .t-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .t-nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid rgba(0,180,216,0.3);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1565C0;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .t-nav-btn:hover { border-color: #00B4D8; box-shadow: 0 0 0 3px rgba(0,180,216,0.1); }
+
+  /* Dots */
+  .t-dot {
+    padding: 8px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .t-dot span {
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 4px;
+    background: #00B4D8;
+    opacity: 0.25;
+    transform: scaleX(1);
+    transform-origin: left center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .t-dot.is-active span {
+    opacity: 1;
+    transform: scaleX(3);
+  }
+</style>
