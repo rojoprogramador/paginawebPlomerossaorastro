@@ -1,6 +1,8 @@
 ---
 // src/components/layout/Navbar.astro
+import { Image } from 'astro:assets';
 import { SITE, SERVICES, ZONES } from '../../lib/seo';
+import imgLogo from '../../assets/logo-plomeros-saor.png';
 ---
 
 <header id="navbar" class="navbar">
@@ -8,13 +10,14 @@ import { SITE, SERVICES, ZONES } from '../../lib/seo';
 
     <!-- Logo -->
     <a href="/" class="navbar-logo" aria-label="Plomeros SAOR — Inicio">
-      <img
-        src="/images/logo/logo-plomeros-saor.png"
+      <Image
+        src={imgLogo}
         alt="Plomeros SAOR — Servicios locativos de calidad"
-        width="261"
-        height="56"
+        width={261}
+        height={56}
         loading="eager"
         fetchpriority="high"
+        quality={80}
         class="navbar-logo-img"
       />
     </a>

@@ -86,16 +86,24 @@ const GADS_ID = 'AW-17162213345';
        - Trigger "phone_click": Tipo = Clic en elemento, URL contenga "tel:"
     5. Conecta GA4 y Google Ads como etiquetas
   ================================================ -->
-  <!-- Google Tag Manager -->
-  <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','${GTM_ID}');`} />
-
-  <!-- Google Ads -->
-  <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GADS_ID}`} />
-  <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GADS_ID}');`} />
+  <!-- GTM + Google Ads — cargados en idle para no bloquear el hilo principal -->
+  <script is:inline set:html={`
+    window.dataLayer=window.dataLayer||[];
+    function gtag(){dataLayer.push(arguments);}
+    function loadTracking(){
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${GTM_ID}');
+      var g=document.createElement('script');g.async=true;
+      g.src='https://www.googletagmanager.com/gtag/js?id=${GADS_ID}';
+      document.head.appendChild(g);
+      gtag('js',new Date());gtag('config','${GADS_ID}');
+    }
+    if(window.requestIdleCallback){requestIdleCallback(loadTracking,{timeout:3000});}
+    else{window.addEventListener('load',loadTracking);}
+  `} />
 </head>
 
 <body>
