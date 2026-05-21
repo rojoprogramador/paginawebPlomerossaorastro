@@ -28,9 +28,8 @@ const canonicalURL = canonical
 
 const schemaData = schema ?? getLocalBusinessSchema();
 
-// GTM ID desde variable de entorno
-// Para producción: agrega GTM-XXXXXXX en el VPS en la variable PUBLIC_GTM_ID
-const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+const GTM_ID = 'GTM-K432JXXZ';
+const GADS_ID = 'AW-17162213345';
 ---
 
 <!DOCTYPE html>
@@ -79,15 +78,16 @@ const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
        - Trigger "phone_click": Tipo = Clic en elemento, URL contenga "tel:"
     5. Conecta GA4 y Google Ads como etiquetas
   ================================================ -->
-  {GTM_ID && (
-    <script
-      set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','${GTM_ID}');`}
-    />
-  )}
+  <!-- Google Tag Manager -->
+  <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','${GTM_ID}');`} />
+
+  <!-- Google Ads -->
+  <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GADS_ID}`} />
+  <script is:inline set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GADS_ID}');`} />
 </head>
 
 <body>
