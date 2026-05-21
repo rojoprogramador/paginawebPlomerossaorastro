@@ -425,11 +425,11 @@ import imgLogo from '../../assets/logo-plomeros-saor.png';
   const mobileMenu   = document.getElementById('mobile-menu');
 
   function openMenu() {
+    mobileMenu?.removeAttribute('inert');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
     hamburgerBtn?.classList.add('open');
     mobileMenu?.classList.add('open');
     hamburgerBtn?.setAttribute('aria-expanded', 'true');
-    mobileMenu?.setAttribute('aria-hidden', 'false');
-    mobileMenu?.removeAttribute('inert');
   }
 
   function closeMenu() {
@@ -437,7 +437,7 @@ import imgLogo from '../../assets/logo-plomeros-saor.png';
     mobileMenu?.classList.remove('open');
     hamburgerBtn?.setAttribute('aria-expanded', 'false');
     mobileMenu?.setAttribute('aria-hidden', 'true');
-    mobileMenu?.setAttribute('inert', '');
+    setTimeout(() => mobileMenu?.setAttribute('inert', ''), 350);
   }
 
   hamburgerBtn?.addEventListener('click', () => {
