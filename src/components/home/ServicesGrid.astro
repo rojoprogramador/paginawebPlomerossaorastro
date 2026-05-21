@@ -119,7 +119,7 @@ const services = [
             <div class="service-icon">{service.icon}</div>
             <h3 class="service-title">{service.title}</h3>
             <p class="service-desc">{service.description}</p>
-            <a href={service.href} class="service-link">
+            <a href={service.href} class="service-link" aria-label={`Ver servicio: ${service.title}`}>
               Ver servicio
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M5 12h14M12 5l7 7-7 7"/>

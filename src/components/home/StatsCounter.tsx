@@ -1,16 +1,15 @@
 // src/components/home/StatsCounter.tsx
-// Island React — Números animados con Framer Motion
-// Se activa cuando el componente entra en el viewport (client:visible)
+// Island React — Números animados sin Framer Motion
+// Usa IntersectionObserver + requestAnimationFrame nativos
 
 import { useRef, useEffect, useState } from 'react';
-import { useInView, animate } from 'framer-motion';
 
 interface Stat {
-  value:  number;
-  label:  string;
+  value:   number;
+  label:   string;
   prefix?: string;
   suffix?: string;
-  icon:   string;
+  icon:    string;
 }
 
 const STATS: Stat[] = [
@@ -20,37 +19,48 @@ const STATS: Stat[] = [
   { value: 100, suffix: '%', label: 'Garantía en los trabajos',  icon: '✅', prefix: '' },
 ];
 
-function CountUp({ from = 0, to, duration = 1.5, prefix = '', suffix = '' }: {
-  from?: number;
-  to: number;
+function CountUp({ to, duration = 1.5, prefix = '', suffix = '', started }: Readonly<{
+  to:        number;
   duration?: number;
-  prefix?: string;
-  suffix?: string;
-}) {
-  const [count, setCount] = useState(from);
-  const nodeRef = useRef<HTMLSpanElement>(null);
-  const inView  = useInView(nodeRef, { once: true, margin: '-50px' });
+  prefix?:   string;
+  suffix?:   string;
+  started:   boolean;
+}>) {
+  const [count, setCount]   = useState(0);
+  const hasRun = useRef(false);
+  const rafRef = useRef<number>();
 
   useEffect(() => {
-    if (!inView) return;
-    const controls = animate(from, to, {
-      duration,
-      ease: [0.25, 0.46, 0.45, 0.94],
-      onUpdate: (v) => setCount(Math.round(v)),
-    });
-    return () => controls.stop();
-  }, [inView, from, to, duration]);
+    if (!started || hasRun.current) return;
+    hasRun.current = true;
+    const t0  = performance.now();
+    const ms  = duration * 1000;
 
-  return (
-    <span ref={nodeRef}>
-      {prefix}{count}{suffix}
-    </span>
-  );
+    const tick = (now: number) => {
+      const p     = Math.min((now - t0) / ms, 1);
+      const eased = 1 - Math.pow(1 - p, 3); // ease-out cubic
+      setCount(Math.round(to * eased));
+      if (p < 1) rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [started, to, duration]);
+
+  return <span>{prefix}{count}{suffix}</span>;
 }
 
 export default function StatsCounter() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(containerRef, { once: true, margin: '-80px' });
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setInView(true); },
+      { rootMargin: '-80px' }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
@@ -60,13 +70,7 @@ export default function StatsCounter() {
         padding: '5rem 0',
       }}
     >
-      <div
-        style={{
-          maxWidth: 1200,
-          margin: '0 auto',
-          padding: '0 1.5rem',
-        }}
-      >
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 1.5rem' }}>
         {/* Título */}
         <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
           <span
@@ -109,7 +113,7 @@ export default function StatsCounter() {
         >
           {STATS.map((stat, i) => (
             <div
-              key={i}
+              key={stat.label}
               style={{
                 textAlign: 'center',
                 padding: '2rem 1.5rem',
@@ -135,15 +139,12 @@ export default function StatsCounter() {
                   marginBottom: '0.375rem',
                 }}
               >
-                {inView ? (
-                  <CountUp
-                    to={stat.value}
-                    prefix={stat.prefix}
-                    suffix={stat.suffix}
-                  />
-                ) : (
-                  `${stat.prefix}0${stat.suffix}`
-                )}
+                <CountUp
+                  to={stat.value}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  started={inView}
+                />
               </div>
               <div
                 style={{

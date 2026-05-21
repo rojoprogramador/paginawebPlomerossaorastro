@@ -1,8 +1,7 @@
 // src/components/home/Testimonials.tsx
-// Island React — Carousel de testimonios con Framer Motion
+// Island React — Carousel de testimonios sin Framer Motion
 
 import { useState, useEffect, useRef } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
 
 const TESTIMONIALS = [
   {
@@ -47,7 +46,7 @@ const TESTIMONIALS = [
   },
 ];
 
-function StarRating({ rating }: { rating: number }) {
+function StarRating({ rating }: Readonly<{ rating: number }>) {
   return (
     <div style={{ display: 'flex', gap: 3 }}>
       {Array.from({ length: 5 }).map((_, i) => (
@@ -67,30 +66,34 @@ function StarRating({ rating }: { rating: number }) {
 
 export default function Testimonials() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(1);
+  const [faded,   setFaded]   = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
 
   const goTo = (index: number) => {
-    setDirection(index > current ? 1 : -1);
-    setCurrent(index);
+    clearInterval(timerRef.current);
+    setFaded(true);
+    setTimeout(() => {
+      setCurrent(index);
+      setFaded(false);
+      timerRef.current = setInterval(autoAdvance, 5000);
+    }, 220);
   };
 
-  const next = () => {
-    const n = (current + 1) % TESTIMONIALS.length;
-    setDirection(1);
-    setCurrent(n);
-  };
-
-  const prev = () => {
-    const n = (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length;
-    setDirection(-1);
-    setCurrent(n);
+  const autoAdvance = () => {
+    setFaded(true);
+    setTimeout(() => {
+      setCurrent(c => (c + 1) % TESTIMONIALS.length);
+      setFaded(false);
+    }, 220);
   };
 
   useEffect(() => {
-    timerRef.current = setInterval(next, 5000);
+    timerRef.current = setInterval(autoAdvance, 5000);
     return () => clearInterval(timerRef.current);
-  }, [current]);
+  }, []);
+
+  const prev = () => goTo((current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+  const next = () => goTo((current + 1) % TESTIMONIALS.length);
 
   const t = TESTIMONIALS[current];
 
@@ -136,87 +139,85 @@ export default function Testimonials() {
 
         {/* Carousel */}
         <div style={{ position: 'relative', overflow: 'hidden' }}>
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.div
-              key={current}
-              custom={direction}
-              initial={{ opacity: 0, x: direction * 80 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -direction * 80 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          {/* Card con fade transition CSS nativo */}
+          <div
+            style={{
+              opacity:    faded ? 0 : 1,
+              transform:  faded ? 'translateY(8px)' : 'translateY(0)',
+              transition: 'opacity 0.22s ease, transform 0.22s ease',
+            }}
+          >
+            <div
+              style={{
+                background: 'white',
+                borderRadius: '1.25rem',
+                padding: '2.5rem',
+                boxShadow: '0 8px 32px rgba(11,34,64,0.1)',
+                border: '1px solid rgba(0,180,216,0.08)',
+                maxWidth: 720,
+                margin: '0 auto',
+                position: 'relative',
+              }}
             >
+              {/* Comillas decorativas */}
               <div
                 style={{
-                  background: 'white',
-                  borderRadius: '1.25rem',
-                  padding: '2.5rem',
-                  boxShadow: '0 8px 32px rgba(11,34,64,0.1)',
-                  border: '1px solid rgba(0,180,216,0.08)',
-                  maxWidth: 720,
-                  margin: '0 auto',
-                  position: 'relative',
+                  position: 'absolute',
+                  top: '1.5rem',
+                  right: '1.5rem',
+                  fontSize: '5rem',
+                  lineHeight: 1,
+                  color: 'rgba(0,180,216,0.08)',
+                  fontFamily: 'Georgia, serif',
+                  userSelect: 'none',
                 }}
               >
-                {/* Comillas decorativas */}
+                "
+              </div>
+
+              <StarRating rating={t.rating} />
+
+              <p
+                style={{
+                  fontSize: '1.125rem',
+                  lineHeight: 1.75,
+                  color: '#374151',
+                  margin: '1.25rem 0',
+                  fontStyle: 'italic',
+                }}
+              >
+                "{t.text}"
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
                 <div
                   style={{
-                    position: 'absolute',
-                    top: '1.5rem',
-                    right: '1.5rem',
-                    fontSize: '5rem',
-                    lineHeight: 1,
-                    color: 'rgba(0,180,216,0.08)',
-                    fontFamily: 'Georgia, serif',
-                    userSelect: 'none',
+                    width: 48,
+                    height: 48,
+                    borderRadius: '50%',
+                    background: 'linear-gradient(135deg, #00B4D8, #1565C0)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'white',
+                    fontWeight: 700,
+                    fontSize: '0.875rem',
+                    flexShrink: 0,
                   }}
                 >
-                  "
+                  {t.avatar}
                 </div>
-
-                <StarRating rating={t.rating} />
-
-                <p
-                  style={{
-                    fontSize: '1.125rem',
-                    lineHeight: 1.75,
-                    color: '#374151',
-                    margin: '1.25rem 0',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  "{t.text}"
-                </p>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.875rem' }}>
-                  <div
-                    style={{
-                      width: 48,
-                      height: 48,
-                      borderRadius: '50%',
-                      background: 'linear-gradient(135deg, #00B4D8, #1565C0)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      color: 'white',
-                      fontWeight: 700,
-                      fontSize: '0.875rem',
-                      flexShrink: 0,
-                    }}
-                  >
-                    {t.avatar}
+                <div>
+                  <div style={{ fontWeight: 700, color: '#0B2240', fontSize: '0.9375rem' }}>
+                    {t.name}
                   </div>
-                  <div>
-                    <div style={{ fontWeight: 700, color: '#0B2240', fontSize: '0.9375rem' }}>
-                      {t.name}
-                    </div>
-                    <div style={{ fontSize: '0.8125rem', color: '#64748B' }}>
-                      {t.zone} · {t.service}
-                    </div>
+                  <div style={{ fontSize: '0.8125rem', color: '#64748B' }}>
+                    {t.zone} · {t.service}
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </AnimatePresence>
+            </div>
+          </div>
 
           {/* Controles */}
           <div
@@ -232,8 +233,7 @@ export default function Testimonials() {
               onClick={prev}
               aria-label="Testimonio anterior"
               style={{
-                width: 40,
-                height: 40,
+                width: 40, height: 40,
                 borderRadius: '50%',
                 background: 'white',
                 border: '2px solid rgba(0,180,216,0.3)',
@@ -251,20 +251,20 @@ export default function Testimonials() {
             </button>
 
             {/* Dots */}
-            {TESTIMONIALS.map((_, i) => (
+            {TESTIMONIALS.map((item, i) => (
               <button
-                key={i}
+                key={item.avatar}
                 onClick={() => goTo(i)}
                 aria-label={`Testimonio ${i + 1}`}
                 style={{
-                  width: i === current ? 24 : 8,
-                  height: 8,
+                  width:      i === current ? 24 : 8,
+                  height:     8,
                   borderRadius: 4,
                   background: i === current ? '#00B4D8' : 'rgba(0,180,216,0.25)',
-                  border: 'none',
-                  cursor: 'pointer',
+                  border:     'none',
+                  cursor:     'pointer',
                   transition: 'all 0.3s ease',
-                  padding: 0,
+                  padding:    0,
                 }}
               />
             ))}
@@ -273,8 +273,7 @@ export default function Testimonials() {
               onClick={next}
               aria-label="Siguiente testimonio"
               style={{
-                width: 40,
-                height: 40,
+                width: 40, height: 40,
                 borderRadius: '50%',
                 background: 'white',
                 border: '2px solid rgba(0,180,216,0.3)',
