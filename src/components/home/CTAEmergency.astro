@@ -1,0 +1,172 @@
+---
+// src/components/home/CTAEmergency.astro
+import { SITE } from '../../lib/seo';
+---
+
+<section class="cta-emergency" id="emergencia">
+  <div class="container cta-inner">
+    <!-- Pulse decorativo -->
+    <div class="emergency-pulse" aria-hidden="true">
+      <span class="emergency-pulse-ring" />
+      <span class="emergency-pulse-ring emergency-pulse-ring-2" />
+      <span class="emergency-icon">🚨</span>
+    </div>
+
+    <div class="cta-content">
+      <div class="badge badge-white">Emergencias 24/7</div>
+      <h2 class="cta-title">¿Inundación? ¿Tubería rota?</h2>
+      <p class="cta-subtitle">
+        Atendemos emergencias de plomería a cualquier hora del día o de la noche
+        en Cali y municipios cercanos. Respuesta en menos de 1 hora.
+      </p>
+    </div>
+
+    <div class="cta-actions">
+      <a
+        href={`tel:${SITE.phone1}`}
+        class="btn btn-white btn-xl"
+        id="emergency-phone-btn"
+      >
+        <!-- GTM: trigger phone_click -->
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.12-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+        Llamar ahora
+      </a>
+      <a
+        href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Tengo una EMERGENCIA de plomería, ¿pueden atenderme ahora?')}`}
+        class="btn btn-whatsapp btn-xl"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="emergency-whatsapp-btn"
+      >
+        WhatsApp urgente
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-emergency {
+    background: linear-gradient(135deg, #dc2626 0%, #ea580c 50%, #f97316 100%);
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-emergency::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .cta-inner {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Pulse */
+  .emergency-pulse {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .emergency-pulse-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  .emergency-pulse-ring-2 {
+    animation-delay: 0.5s;
+  }
+
+  .emergency-icon {
+    font-size: 2.5rem;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+  }
+
+  /* Contenido */
+  .cta-content { flex: 1; min-width: 260px; }
+
+  .badge-white {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.875rem;
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    margin-bottom: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .cta-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .cta-subtitle {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.6;
+    max-width: 520px;
+  }
+
+  /* CTAs */
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .btn-white {
+    background: white;
+    color: #dc2626;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-white:hover {
+    background: #fff7ed;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  .btn-xl {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 768px) {
+    .cta-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .emergency-pulse { margin: 0 auto; }
+    .cta-actions {
+      width: 100%;
+    }
+    .btn-xl { justify-content: center; }
+  }
+</style>

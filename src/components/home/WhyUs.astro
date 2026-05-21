@@ -1,0 +1,185 @@
+---
+// src/components/home/WhyUs.astro
+import { Image } from 'astro:assets';
+import SectionTitle from '../shared/SectionTitle.astro';
+import imgEquipo from '../../assets/team/equipo-plomeros-saor.png';
+
+const reasons = [
+  {
+    icon: '🎯',
+    title: 'Tecnología sin demoler',
+    desc: 'Geófono y cámara térmica para encontrar fugas sin romper paredes ni pisos. Ahorra tiempo y dinero.',
+  },
+  {
+    icon: '⚡',
+    title: 'Respuesta en menos de 1 hora',
+    desc: 'Emergencias 24/7. Llegamos a Cali y municipios cercanos en el menor tiempo posible.',
+  },
+  {
+    icon: '🏆',
+    title: 'Más de 6 años de experiencia',
+    desc: 'Hemos resuelto cientos de casos en Cali, Jamundí, Palmira y Yumbo. Conocemos cada tipo de instalación.',
+  },
+  {
+    icon: '✅',
+    title: 'Garantía en todos los trabajos',
+    desc: 'Respaldamos cada reparación e instalación. Si algo falla, volvemos sin costo adicional.',
+  },
+  {
+    icon: '💰',
+    title: 'Presupuesto sin compromiso',
+    desc: 'Te damos el diagnóstico y el presupuesto antes de empezar. Sin sorpresas en la factura final.',
+  },
+  {
+    icon: '📋',
+    title: 'Trabajos con factura',
+    desc: 'Emitimos factura electrónica por cada servicio. Transparencia total en precios y materiales.',
+  },
+];
+---
+
+<section class="section-alt" id="por-que-nosotros">
+  <div class="container">
+    <div class="whyus-grid">
+      <!-- Imagen del equipo -->
+      <div class="whyus-media">
+        <!-- FOTO PENDIENTE: Reemplaza imgEquipo con la foto real del equipo (700x800px) -->
+        <Image
+          src={imgEquipo}
+          alt="Equipo de técnicos profesionales de Plomeros SAOR en Cali"
+          loading="lazy"
+          widths={[480, 700]}
+          sizes="(max-width:768px) 100vw, 50vw"
+        />
+
+        <!-- Badge de rating sobre la imagen -->
+        <div class="rating-badge">
+          <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+          <div class="rating-number">4.9 / 5</div>
+          <div class="rating-label">47 reseñas verificadas</div>
+        </div>
+      </div>
+
+      <!-- Razones -->
+      <div>
+        <SectionTitle
+          badge="¿Por qué elegir Plomeros SAOR?"
+          title="Soluciones de <span class='text-gradient-brand'>alta precisión</span>, sin demoler"
+          subtitle="Combinamos tecnología avanzada con experiencia real para resolver tu problema desde la primera visita."
+        />
+
+        <div class="reasons-grid">
+          {reasons.map((r, i) => (
+            <div class="reason-item" style={`animation-delay:${i * 0.06}s`}>
+              <div class="reason-icon">{r.icon}</div>
+              <div>
+                <h3 class="reason-title">{r.title}</h3>
+                <p class="reason-desc">{r.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <a href="/about-plomeros-cali" class="btn btn-primary" style="margin-top:1.5rem;">
+          Conocer más sobre nosotros →
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .whyus-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.3fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .whyus-media {
+    position: relative;
+  }
+
+  .whyus-placeholder {
+    border-radius: var(--radius-xl) !important;
+  }
+
+  .whyus-media img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .rating-badge {
+    position: absolute;
+    bottom: -1.25rem;
+    right: -1.25rem;
+    background: white;
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    border: 1px solid rgba(0, 180, 216, 0.1);
+  }
+
+  .rating-stars { font-size: 1rem; margin-bottom: 0.25rem; }
+  .rating-number {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1;
+  }
+  .rating-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    margin-top: 0.125rem;
+  }
+
+  /* Razones */
+  .reasons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+
+  .reason-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  .reason-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.125rem;
+  }
+
+  .reason-title {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .reason-desc {
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .whyus-grid {
+      grid-template-columns: 1fr;
+    }
+    .whyus-media { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .reasons-grid { grid-template-columns: 1fr; }
+  }
+</style>

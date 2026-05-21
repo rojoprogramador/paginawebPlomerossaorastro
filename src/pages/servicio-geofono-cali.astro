@@ -1,0 +1,436 @@
+---
+// src/pages/servicio-geofono-cali.astro
+// Página estrella ⭐ — Servicio Geófono Cali
+// GTM: crear audiencia de remarketing para visitantes de esta página
+
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/shared/Breadcrumb.astro';
+import FAQAccordion from '../components/services/FAQAccordion';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { Image } from 'astro:assets';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHeroGeofono from '../assets/services/geofono-cali.jpg';
+import imgEquipoGeofono from '../assets/services/equipo-geofono.jpg';
+
+/*
+  GTM — Remarketing por servicio:
+  1. En Google Ads: Herramientas → Gestor de audiencias → Segmentos → Nuevo → Visitantes del sitio web
+  2. Agrega la URL: /servicio-geofono-cali
+  3. Conecta esa audiencia a una campaña de display o búsqueda con este segmento
+  4. Esto permite mostrar anuncios a quienes ya vieron este servicio
+*/
+
+const faqs = [
+  {
+    question: '¿Qué es un geófono y cómo funciona para detectar fugas?',
+    answer: 'El geófono es un equipo de escucha acústica de alta sensibilidad que detecta las vibraciones y el sonido que produce el agua al escapar de una tubería dañada. Nuestro técnico coloca el sensor en el suelo o la pared y mueve el dispositivo hasta encontrar el punto exacto de la fuga. La tecnología permite ubicar el daño sin necesidad de demoler paredes ni romper pisos, lo que reduce enormemente el costo de la reparación.',
+  },
+  {
+    question: '¿El geófono puede detectar fugas en cualquier tipo de tubería?',
+    answer: 'Sí, el geófono es efectivo en tuberías de PVC, cobre, hierro galvanizado y polietileno. Funciona tanto en tuberías de agua fría como caliente. La única limitación es en redes de gas, donde usamos equipos especializados diferentes.',
+  },
+  {
+    question: '¿Cuánto tiempo demora el diagnóstico con geófono?',
+    answer: 'Normalmente el diagnóstico toma entre 30 y 90 minutos dependiendo del tamaño del inmueble y la complejidad de la red de tuberías. Una vez localizada la fuga, podemos iniciar la reparación el mismo día.',
+  },
+  {
+    question: '¿Tienen que romper algo para usar el geófono?',
+    answer: 'No. Esa es precisamente la ventaja del geófono: localiza la fuga de forma no invasiva. Solo en el punto exacto donde está el daño realizamos la apertura mínima necesaria para hacer la reparación, lo que significa mucho menos daño a tu propiedad comparado con los métodos tradicionales.',
+  },
+  {
+    question: '¿Cuánto cuesta el servicio de geófono en Cali?',
+    answer: 'El costo del servicio de geófono varía según el tipo de inmueble y la complejidad de la red. Te damos un presupuesto antes de empezar, sin costo y sin compromiso. En general, resulta mucho más económico que pagar demolición tradicional para encontrar la fuga. Llámanos al 318 592 2585 para una cotización.',
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: 'Detección de fugas con geófono en Cali',
+      description: 'Servicio de detección de fugas de agua mediante tecnología de geófono en Cali. Localización precisa sin demoler paredes ni pisos. Diagnóstico rápido y garantizado.',
+      provider: {
+        '@type': 'Plumber',
+        name: SITE.name,
+        telephone: SITE.phone1,
+      },
+      areaServed: { '@type': 'City', name: 'Cali' },
+      serviceType: 'Detección de fugas con geófono',
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: faqs.map(f => ({
+        '@type': 'Question',
+        name: f.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: f.answer,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<Layout
+  title={buildTitle('Servicio Geófono en Cali — Detección de Fugas Sin Romper')}
+  description="Detectamos fugas de agua con geófono en Cali sin romper paredes ni pisos. Diagnóstico preciso en 30-90 minutos. Plomeros SAOR ☎ 318 592 2585. Servicio 24 horas."
+  canonical="/servicio-geofono-cali"
+  schema={serviceSchema}
+>
+  <!-- Navbar spacer -->
+  <div style="padding-top: 68px;" />
+
+  <!-- Hero del servicio -->
+  <section class="service-hero">
+    <div class="service-hero-bg">
+      <!-- FOTO PENDIENTE: Foto del geófono en uso, técnico con equipo
+           <img src="/images/services/geofono/geofono-cali.jpg" alt="..." class="service-hero-img" /> -->
+      <Image
+        src={imgHeroGeofono}
+        alt="Técnico de Plomeros SAOR usando geófono para detectar fuga de agua en Cali"
+        class="service-hero-img"
+        style="width:100%; height:100%; object-fit:cover;"
+        loading="eager"
+        widths={[768, 1280, 1920]}
+        sizes="100vw"
+      />
+    </div>
+    <div class="service-hero-overlay" />
+    <div class="container service-hero-content">
+      <Breadcrumb items={[
+        { label: 'Inicio', href: '/' },
+        { label: 'Servicios', href: '/plomeros-en-cali' },
+        { label: 'Geófono' },
+      ]} />
+
+      <div class="service-badge-wrap">
+        <span class="badge badge-brand">⭐ Nuestra especialidad</span>
+        <span class="badge badge-orange">Sin demoler</span>
+      </div>
+
+      <h1 class="service-hero-title">
+        Geófono en Cali —<br>
+        <span class="text-gradient-brand">Detección de Fugas Sin Romper</span>
+      </h1>
+      <p class="service-hero-subtitle">
+        Localizamos fugas de agua en tuberías empotradas con tecnología acústica 
+        de precisión. Sin romper paredes, sin demoler pisos, sin sorpresas.
+      </p>
+
+      <div class="service-hero-ctas">
+        <a
+          href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hola, necesito el servicio de geófono en Cali')}`}
+          class="btn btn-whatsapp btn-lg"
+          target="_blank" rel="noopener"
+        >WhatsApp</a>
+        <a href={`tel:${SITE.phone1}`} class="btn btn-lg btn-white-ghost">
+          📞 {SITE.phone1}
+        </a>
+        <a href="/contacto" class="btn btn-primary btn-lg">Cotizar →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es el geófono -->
+  <section class="section">
+    <div class="container">
+      <div class="two-col">
+        <div>
+          <span class="section-tag-inline">¿Qué es?</span>
+          <h2 class="section-h2">El geófono: la tecnología que <span class="text-gradient-brand">elimina la demolición</span></h2>
+          <p class="text-body">
+            El geófono es un dispositivo de escucha acústica que detecta las vibraciones
+            producidas por el agua al escapar de una tubería dañada. Nuestro técnico lo
+            desplaza sobre el suelo o la pared hasta ubicar el punto exacto de la fuga.
+          </p>
+          <p class="text-body" style="margin-top:0.75rem;">
+            En Cali y municipios cercanos, miles de propiedades tienen tuberías empotradas
+            en concreto. Antes, encontrar una fuga requería romper pisos y paredes al azar.
+            Con el geófono, la apertura es mínima y exacta.
+          </p>
+
+          <div class="benefits-list">
+            {[
+              '✅ Sin romper paredes ni pisos innecesariamente',
+              '✅ Diagnóstico en 30–90 minutos',
+              '✅ Válido para tuberías de PVC, cobre e hierro',
+              '✅ Resultado más económico que el método tradicional',
+              '✅ Garantía en la detección y la reparación',
+            ].map(b => (
+              <div class="benefit-item">{b}</div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <Image
+            src={imgEquipoGeofono}
+            alt="Equipo geófono de alta precisión — Plomeros SAOR Cali"
+            style="width:100%; height:420px; object-fit:cover; border-radius:var(--radius-lg); box-shadow:var(--shadow-md);"
+            loading="eager"
+            widths={[480, 800]}
+            sizes="(max-width:768px) 0px, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso paso a paso -->
+  <section class="section-alt">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:2.5rem;">
+        <h2 class="section-h2">¿Cómo funciona el proceso?</h2>
+        <p style="color:var(--color-muted);">En 4 pasos resolvemos tu problema sin adivinar dónde está la fuga</p>
+      </div>
+
+      <div class="steps-grid">
+        {[
+          { n: '01', icon: '📞', title: 'Llámanos o escríbenos', desc: 'Cuéntanos el problema. Te damos el presupuesto y coordinamos la visita.' },
+          { n: '02', icon: '🎯', title: 'Diagnóstico con geófono', desc: 'Nuestro técnico llega con el equipo y recorre la red de tuberías escuchando con el geófono.' },
+          { n: '03', icon: '📍', title: 'Punto exacto localizado', desc: 'Marcamos el punto exacto de la fuga. Solo abrimos ahí, nada más.' },
+          { n: '04', icon: '🔧', title: 'Reparación y garantía', desc: 'Reparamos la tubería, cerramos y te damos garantía por escrito del trabajo.' },
+        ].map(step => (
+          <div class="step-card">
+            <div class="step-number">{step.n}</div>
+            <div class="step-icon">{step.icon}</div>
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-desc">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería trabajos -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-h2" style="text-align:center; margin-bottom:1.5rem;">
+        Trabajos reales con geófono en Cali
+      </h2>
+      <div class="gallery-grid">
+        {Array.from({length: 6}).map((_, i) => (
+          <Image
+            src={`/images/services/geofono/trabajo-${i+1}.jpg`}
+            alt={`Trabajo real de detección de fuga con geófono en Cali #${i+1}`}
+            width={480}
+            height={220}
+            style="width:100%; height:220px; object-fit:cover; border-radius:var(--radius-md);"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQAccordion
+    faqs={faqs}
+    title="Preguntas frecuentes sobre el geófono"
+    client:visible
+  />
+
+  <!-- CTA Emergencia -->
+  <CTAEmergency />
+</Layout>
+
+<style>
+  /* Hero */
+  .service-hero {
+    position: relative;
+    min-height: 70vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 4rem;
+  }
+
+  .service-hero-bg {
+    position: absolute;
+    inset: 0;
+  }
+
+  .service-hero-placeholder {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    min-height: unset !important;
+  }
+
+  .service-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(11, 34, 64, 0.95) 0%,
+      rgba(11, 34, 64, 0.6) 60%,
+      rgba(11, 34, 64, 0.3) 100%
+    );
+    z-index: 1;
+  }
+
+  .service-hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .service-badge-wrap {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+  }
+
+  .service-hero-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .service-hero-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.65;
+    max-width: 600px;
+    margin-bottom: 1.75rem;
+  }
+
+  .service-hero-ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-white-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    border: 2px solid rgba(255,255,255,0.35);
+    font-weight: 600;
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-white-ghost:hover {
+    background: rgba(255,255,255,0.25);
+    color: white;
+  }
+
+  /* Sección 2 cols */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  .section-tag-inline {
+    display: inline-block;
+    background: rgba(0,180,216,0.1);
+    border: 1px solid rgba(0,180,216,0.3);
+    color: var(--color-brand);
+    padding: 0.25rem 0.875rem;
+    border-radius: 99px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-h2 {
+    font-size: clamp(1.5rem, 3.5vw, 2rem);
+    font-weight: 800;
+    color: var(--color-navy);
+    line-height: 1.25;
+    margin-bottom: 1rem;
+  }
+
+  .text-body {
+    font-size: 0.9375rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+  }
+
+  .benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .benefit-item {
+    font-size: 0.9rem;
+    color: var(--color-navy);
+    font-weight: 500;
+  }
+
+  /* Pasos */
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .step-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.75rem 1.25rem;
+    text-align: center;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0,180,216,0.08);
+    position: relative;
+    transition: transform 0.25s ease;
+  }
+
+  .step-card:hover { transform: translateY(-4px); }
+
+  .step-number {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-brand);
+    color: white;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    border-radius: 99px;
+  }
+
+  .step-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .step-title { font-size: 0.9375rem; font-weight: 700; color: var(--color-navy); margin-bottom: 0.375rem; }
+  .step-desc { font-size: 0.8125rem; color: var(--color-muted); line-height: 1.6; }
+
+  /* Galería */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    .two-col { grid-template-columns: 1fr; }
+    .two-col > div:last-child { display: none; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .service-hero-ctas { flex-direction: column; }
+  }
+</style>

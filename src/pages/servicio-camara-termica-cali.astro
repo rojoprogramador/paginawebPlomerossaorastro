@@ -1,0 +1,81 @@
+---
+// src/pages/servicio-camara-termica-cali.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import FAQAccordion from '../components/services/FAQAccordion';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHero from '../assets/services/camara-termica-cali.jpg';
+
+const faqs = [
+  {
+    question: '¿Qué diferencia hay entre la cámara térmica y el geófono?',
+    answer: 'El geófono detecta fugas por el sonido del agua al escapar (ideal para tuberías empotradas en concreto). La cámara térmica detecta diferencias de temperatura en superficies, lo que la hace ideal para encontrar fugas detrás de paredes de drywall, bajo baldosa con poca capa de concreto, o en sistemas de agua caliente. Los dos métodos son complementarios.',
+  },
+  {
+    question: '¿La cámara térmica puede detectar fugas en agua fría?',
+    answer: 'La cámara térmica es más efectiva en fugas de agua caliente, ya que el diferencial de temperatura hace la mancha de calor visible. Para agua fría, funciona mejor en zonas húmedas activas donde la evaporación genera un diferencial de temperatura. En estos casos, combinamos la termografía con el geófono para mayor precisión.',
+  },
+  {
+    question: '¿Es necesario abrir la pared para usar la cámara térmica?',
+    answer: 'No. La cámara térmica trabaja de forma completamente no invasiva: el técnico apunta el equipo hacia la pared y en la pantalla se visualizan las anomalías de temperatura. Solo cuando localizamos la fuga hacemos la apertura mínima necesaria para reparar.',
+  },
+  {
+    question: '¿La cámara térmica sirve para detectar humedad en paredes?',
+    answer: 'Sí. La termografía es una excelente herramienta para detectar zonas de humedad, filtraciones de agua lluvia y condensación. Identifica exactamente dónde está el problema antes de intervenir, evitando obras innecesarias.',
+  },
+];
+---
+
+<Layout
+  title={buildTitle('Cámara Térmica para Fugas en Cali — Termografía · Plomeros SAOR')}
+  description="Detectamos fugas de agua con cámara térmica en Cali sin abrir paredes. Termografía infrarroja para fugas ocultas. Plomeros SAOR ☎ 318 592 2585."
+  canonical="/servicio-camara-termica-cali"
+>
+  <ServiceHero
+    title="Cámara Térmica en Cali —<br><span class='text-gradient-brand'>Fugas Sin Abrir Paredes</span>"
+    subtitle="Termografía infrarroja para detectar fugas de agua, zonas húmedas y problemas de instalación detrás de paredes y bajo pisos. Resultado inmediato en pantalla."
+    badgeLabel="🌡️ Termografía infrarroja"
+    badgeColor="brand"
+    badgeLabel2="Sin romper"
+    badgeColor2="orange"
+    imageSrc={imgHero}
+    imageAlt="Detección de fugas con cámara térmica infrarroja en Cali — Plomeros SAOR"
+    whatsappText="Hola, necesito el servicio de cámara térmica para detectar fugas en Cali"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Servicios', href: '/plomeros-en-cali' },
+      { label: 'Cámara Térmica' },
+    ]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;">
+        {[
+          {icon:'🌡️',title:'Fugas de agua caliente',desc:'Detecta el diferencial de temperatura con precisión milimétrica.'},
+          {icon:'💧',title:'Humedad en paredes',desc:'Filtraciones y condensación visibles en tiempo real.'},
+          {icon:'🏗️',title:'Drywall y cielos rasos',desc:'Ideal para paredes de cartón yeso donde el geófono tiene limitaciones.'},
+        ].map(c => (
+          <div class="card" style="padding:1.75rem;text-align:center;">
+            <div style="font-size:2.25rem;margin-bottom:0.75rem;">{c.icon}</div>
+            <h3 style="font-weight:700;color:var(--color-navy);margin-bottom:0.375rem;">{c.title}</h3>
+            <p style="font-size:0.875rem;color:var(--color-muted);">{c.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <FAQAccordion faqs={faqs} title="Preguntas frecuentes sobre cámara térmica" client:visible />
+  <CTAEmergency />
+</Layout>
+
+<style>
+  @media (max-width: 640px) {
+    .section .container > div {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+// src/components/shared/SectionTitle.astro
+
+interface Props {
+  badge?:    string;
+  title:     string;
+  subtitle?: string;
+  center?:   boolean;
+  light?:    boolean;  // para fondos oscuros
+}
+
+const { badge, title, subtitle, center = false, light = false } = Astro.props;
+---
+
+<div class:list={['section-title-wrapper', { center, light }]}>
+  {badge && (
+    <span class:list={['badge', light ? 'badge-sky' : 'badge-brand']}>
+      {badge}
+    </span>
+  )}
+  <h2 class="section-title" set:html={title} />
+  {subtitle && <p class="section-subtitle">{subtitle}</p>}
+</div>
+
+<style>
+  .section-title-wrapper {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-title-wrapper.center {
+    text-align: center;
+  }
+
+  .badge {
+    margin-bottom: 0.75rem;
+  }
+
+  .badge-sky {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background: rgba(79, 195, 247, 0.15);
+    color: #4FC3F7;
+    border: 1px solid rgba(79, 195, 247, 0.3);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .light .section-title {
+    color: white;
+  }
+
+  .section-subtitle {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    max-width: 640px;
+  }
+
+  .center .section-subtitle {
+    margin: 0 auto;
+  }
+
+  .light .section-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+  }
+</style>

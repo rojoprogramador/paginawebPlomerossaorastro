@@ -1,0 +1,79 @@
+---
+// src/pages/index.astro
+// Página principal — Home
+
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/home/Hero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import StatsCounter from '../components/home/StatsCounter';
+import WhyUs from '../components/home/WhyUs.astro';
+import Testimonials from '../components/home/Testimonials';
+import AreasCoverage from '../components/home/AreasCoverage.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+
+// Schema adicional para Home: WebSite + SiteLinksSearchBox
+const homeSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Plumber',
+      name: SITE.name,
+      description: 'Plomeros profesionales en Cali. Detección de fugas con geófono y cámara térmica, destape de cañerías, remodelación de baños. Servicio 24 horas en Cali, Jamundí, Palmira y Yumbo.',
+      url: SITE.url,
+      telephone: [SITE.phone1, SITE.phone2],
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Cali',
+        addressRegion: 'Valle del Cauca',
+        addressCountry: 'CO',
+      },
+      openingHours: 'Mo-Su 00:00-24:00',
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '47',
+      },
+      areaServed: ['Cali', 'Jamundí', 'Palmira', 'Yumbo'],
+    },
+    {
+      '@type': 'WebSite',
+      name: SITE.name,
+      url: SITE.url,
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${SITE.url}/blog-plomeros-en-cali?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  ],
+};
+---
+
+<Layout
+  title={buildTitle('Plomeros en Cali — Geófono, Cámara Térmica y Destape 24 Horas')}
+  description="Plomeros SAOR: expertos en detección de fugas con geófono y cámara térmica en Cali. Destape de cañerías, remodelación de baños e instalaciones. Servicio 24h. ☎ 318 592 2585"
+  canonical="/"
+  schema={homeSchema}
+>
+  <!-- Hero principal -->
+  <Hero />
+
+  <!-- Grid de servicios -->
+  <ServicesGrid />
+
+  <!-- Contador de estadísticas (Island) -->
+  <StatsCounter client:visible />
+
+  <!-- Por qué elegirnos -->
+  <WhyUs />
+
+  <!-- Testimonios (Island carousel) -->
+  <Testimonials client:visible />
+
+  <!-- Zonas de cobertura -->
+  <AreasCoverage />
+
+  <!-- CTA Emergencia 24h -->
+  <CTAEmergency />
+</Layout>

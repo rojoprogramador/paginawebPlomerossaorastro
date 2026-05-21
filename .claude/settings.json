@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(Start-Sleep -Seconds 5)",
+      "Bash(Get-Content \"C:\\\\Users\\\\User\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-User-Desktop-WebPlomerossaorAstro\\\\3e254fa3-2e1e-43ca-aaaf-0a63ac915218\\\\tasks\\\\by36p6899.output\")",
+      "PowerShell(Copy-Item \"C:\\\\Users\\\\User\\\\Desktop\\\\WebPlomerossaorAstro\\\\src\\\\assets\\\\imagenesdeapoyo\\\\caroempresaplomerossaor.png\" \"C:\\\\Users\\\\User\\\\Desktop\\\\WebPlomerossaorAstro\\\\src\\\\assets\\\\team\\\\carro-empresa-saor.png\" -Force)",
+      "Bash(git init *)",
+      "Bash(git branch *)",
+      "Bash(git add *)"
+    ]
+  }
+}

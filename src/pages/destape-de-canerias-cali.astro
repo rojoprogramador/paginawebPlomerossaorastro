@@ -1,0 +1,118 @@
+---
+// src/pages/destape-de-canerias-cali.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import FAQAccordion from '../components/services/FAQAccordion';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHero from '../assets/services/destape-canerias.jpeg';
+
+const faqs = [
+  {
+    question: '¿Cuánto cuesta destapar una cañería en Cali?',
+    answer: 'El costo de destape varía según el tipo de cañería, la profundidad y la dificultad del tapón. Puede ir desde $80.000 hasta $350.000 COP para casos más complejos. Siempre te damos el precio antes de empezar. Llámanos al 318 592 2585 para una cotización sin compromiso.',
+  },
+  {
+    question: '¿Qué causa los taponamientos en las cañerías?',
+    answer: 'Los tapones más comunes son causados por acumulación de grasa, pelos, jabón, residuos de comida, papel húmedo o raíces de árboles que ingresan a la red. En edificios antiguos de Cali, también es frecuente la acumulación de sarro por la dureza del agua.',
+  },
+  {
+    question: '¿Pueden destapar cañerías en apartamentos?',
+    answer: 'Sí. Trabajamos en casas, apartamentos, locales comerciales, restaurantes y empresas. Tenemos equipos de diferente tamaño para redes pequeñas (baños, cocinas) y para redes principales o bajantes de edificios.',
+  },
+  {
+    question: '¿Atienden emergencias de destape a toda hora?',
+    answer: 'Sí, atendemos emergencias 24 horas, los 7 días de la semana. Si el inodoro está desbordado o la cocina está inundada, llámanos al 318 592 2585 y llegamos en 1 a 2 horas en Cali.',
+  },
+  {
+    question: '¿El destape tiene garantía?',
+    answer: 'Sí, garantizamos nuestros trabajos. Si el tapón vuelve en el período de garantía, regresamos sin costo adicional. La duración de la garantía depende del tipo de trabajo realizado.',
+  },
+];
+---
+
+<Layout
+  title={buildTitle('Destape de Cañerías en Cali — 24 Horas · Plomeros SAOR')}
+  description="Destapamos cañerías en Cali a cualquier hora. Lavamanos, duchas, inodoros y redes principales. Servicio rápido y garantizado. ☎ 318 592 2585. Emergencias 24h."
+  canonical="/destape-de-canerias-cali"
+>
+  <ServiceHero
+    title="Destape de Cañerías <span class='text-gradient-brand'>en Cali</span>"
+    subtitle="Destapamos lavamanos, duchas, inodoros, cocinas y redes principales. Servicio 24 horas en Cali, Jamundí, Palmira y Yumbo."
+    badgeLabel="🚿 Servicio más solicitado"
+    badgeColor="orange"
+    badgeLabel2="⚡ Emergencias 24h"
+    badgeColor2="brand"
+    imageSrc={imgHero}
+    imageAlt="Técnico de Plomeros SAOR destapando cañería en Cali"
+    whatsappText="Hola, necesito destapar una cañería en Cali"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Servicios', href: '/plomeros-en-cali' },
+      { label: 'Destape de cañerías' },
+    ]}
+  />
+
+  <!-- Tipos de destape -->
+  <section class="section-alt">
+    <div class="container">
+      <h2 class="section-h2 text-center" style="margin-bottom:2rem;">¿Qué tipo de cañería necesitas destapar?</h2>
+      <div class="services-type-grid">
+        {[
+          { icon: '🪣', name: 'Lavamanos', desc: 'Obstrucciones por sarro, jabón y residuos.' },
+          { icon: '🚿', name: 'Ducha y bañera', desc: 'Tapones por pelo y acumulación de jabón.' },
+          { icon: '🚽', name: 'Inodoro', desc: 'Atascamientos y desbordamientos urgentes.' },
+          { icon: '🍳', name: 'Cocina', desc: 'Grasa acumulada en sifón y red principal.' },
+          { icon: '🌧️', name: 'Bajante de edificio', desc: 'Redes principales y columnas de aguas negras.' },
+          { icon: '🌿', name: 'Red con raíces', desc: 'Raíces que invadieron la tubería enterrada.' },
+        ].map(t => (
+          <div class="type-card">
+            <div class="type-icon">{t.icon}</div>
+            <h3 class="type-name">{t.name}</h3>
+            <p class="type-desc">{t.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <FAQAccordion faqs={faqs} title="Preguntas frecuentes sobre destape de cañerías" client:visible />
+
+  <!-- CTA -->
+  <CTAEmergency />
+</Layout>
+
+<style>
+  .section-h2 { font-size: clamp(1.5rem, 3.5vw, 2rem); font-weight: 800; color: var(--color-navy); }
+  .text-center { text-align: center; }
+
+  .services-type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .type-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0,180,216,0.08);
+    transition: transform 0.2s ease;
+  }
+
+  .type-card:hover { transform: translateY(-4px); }
+  .type-icon { font-size: 2rem; margin-bottom: 0.625rem; }
+  .type-name { font-weight: 700; color: var(--color-navy); margin-bottom: 0.25rem; }
+  .type-desc { font-size: 0.8125rem; color: var(--color-muted); line-height: 1.5; }
+
+  @media (max-width: 768px) {
+    .services-type-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .services-type-grid { grid-template-columns: 1fr; }
+  }
+</style>

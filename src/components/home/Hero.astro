@@ -1,0 +1,361 @@
+---
+// src/components/home/Hero.astro
+import { Image } from 'astro:assets';
+import { SITE } from '../../lib/seo';
+import imgHero from '../../assets/hero/hero-principal.png';
+---
+
+<section class="hero" id="hero" aria-label="Sección principal">
+  <!-- Fondo: imagen real del equipo / trabajo -->
+  <!-- FOTO PENDIENTE: Reemplaza el div hero-bg con:
+       <img src="/images/hero/hero-principal.jpg" alt="Plomeros SAOR — equipo en Cali" class="hero-bg-img" />
+       Tamaño ideal: 1920x1080px, formato WebP -->
+  <div class="hero-bg">
+    <Image
+      src={imgHero}
+      alt="Plomeros SAOR — Equipo profesional de plomería en Cali"
+      class="hero-bg-img"
+      loading="eager"
+      widths={[768, 1280, 1920]}
+      sizes="100vw"
+    />
+  </div>
+  <div class="hero-overlay" />
+
+  <div class="container hero-content">
+    <!-- Badge disponibilidad -->
+    <div class="hero-badge" id="hero-badge">
+      <span class="pulse-dot" />
+      Disponible 24 horas — 7 días a la semana
+    </div>
+
+    <!-- Título con stagger -->
+    <h1 class="hero-title" id="hero-title">
+      <span class="hero-line">Plomeros en Cali</span>
+      <span class="hero-line hero-line-brand">Profesionales y Confiables</span>
+    </h1>
+
+    <p class="hero-subtitle" id="hero-subtitle">
+      Detección de fugas con <strong>geófono y cámara térmica</strong>, destape 
+      de cañerías e instalaciones. Más de 6 años de experiencia en Cali, 
+      Jamundí, Palmira y Yumbo.
+    </p>
+
+    <!-- Stats rápidos -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <strong>6+</strong>
+        <span>Años de experiencia</span>
+      </div>
+      <div class="hero-stat-divider" />
+      <div class="hero-stat">
+        <strong>200+</strong>
+        <span>Clientes satisfechos</span>
+      </div>
+      <div class="hero-stat-divider" />
+      <div class="hero-stat">
+        <strong>1–2h</strong>
+        <span>Tiempo de respuesta</span>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="hero-ctas" id="hero-ctas">
+      <a
+        href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent('Hola, necesito un plomero en Cali. ¿Pueden ayudarme?')}`}
+        class="btn btn-whatsapp btn-lg"
+        target="_blank"
+        rel="noopener noreferrer"
+        id="hero-whatsapp-btn"
+      >
+        <!-- GTM: trigger whatsapp_click -->
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        WhatsApp ahora
+      </a>
+      <a
+        href={`tel:${SITE.phone1}`}
+        class="btn btn-lg hero-btn-phone"
+        style="background:rgba(255,255,255,0.15);color:white;backdrop-filter:blur(8px);border:2px solid rgba(255,255,255,0.3);"
+        id="hero-phone-btn"
+      >
+        <!-- GTM: trigger phone_click -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.12-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+        Llamar
+      </a>
+      <!-- Cotizar: solo visible en desktop -->
+      <a href="/contacto" class="btn btn-lg btn-primary hero-btn-cotizar" id="hero-contact-btn">
+        Cotizar →
+      </a>
+    </div>
+
+    <!-- Confianza -->
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-brand)">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Sin romper pisos, ni paredes
+      </div>     
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--color-brand)">
+          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Garantía en todos los trabajos
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-indicator" aria-hidden="true">
+    <div class="scroll-indicator-dot" />
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 68px; /* navbar height */
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(11, 34, 64, 0.92) 0%,
+      rgba(11, 34, 64, 0.75) 50%,
+      rgba(21, 101, 192, 0.6) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+    max-width: 900px;
+  }
+
+  /* Badge */
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(0, 180, 216, 0.15);
+    border: 1px solid rgba(0, 180, 216, 0.4);
+    color: #4FC3F7;
+    padding: 0.375rem 1rem;
+    border-radius: 99px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22C55E;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.4);
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  /* Título */
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.05;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-line {
+    display: block;
+    animation: fadeInUp 0.6s ease both;
+  }
+
+  .hero-line:nth-child(1) { animation-delay: 0.1s; }
+  .hero-line:nth-child(2) { animation-delay: 0.2s; }
+
+  .hero-line-brand {
+    color: var(--color-brand);
+  }
+
+  /* Subtítulo */
+  .hero-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    margin-bottom: 1.75rem;
+    animation: fadeInUp 0.6s ease 0.3s both;
+  }
+
+  .hero-subtitle strong {
+    color: var(--color-brand);
+    font-weight: 600;
+  }
+
+  /* Stats */
+  .hero-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 0.6s ease 0.35s both;
+    flex-wrap: nowrap; /* nunca hace wrap en desktop */
+  }
+
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+
+  .hero-stat strong {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-brand);
+    line-height: 1;
+  }
+
+  .hero-stat span {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.125rem;
+  }
+
+  .hero-stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    flex-shrink: 0;
+  }
+
+  /* CTAs */
+  .hero-ctas {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+    animation: fadeInUp 0.6s ease 0.4s both;
+  }
+
+  /* Trust */
+  .hero-trust {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.5s both;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+  }
+
+  .scroll-indicator-dot {
+    width: 28px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 14px;
+    position: relative;
+  }
+
+  .scroll-indicator-dot::before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.6);
+    border-radius: 2px;
+    animation: scroll-dot 1.5s ease infinite;
+  }
+
+  @keyframes scroll-dot {
+    0%   { top: 6px; opacity: 1; }
+    100% { top: 22px; opacity: 0; }
+  }
+
+  @media (max-width: 640px) {
+    /* Stats: grid de 3 col iguales en mobile, ocultar divisores */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      flex-wrap: unset;
+    }
+    .hero-stat-divider { display: none; }
+    .hero-stat { border-right: none; }
+
+    /* En mobile: WhatsApp full ancho + Llamar */
+    .hero-ctas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.625rem;
+    }
+    /* Ocultar el botón Cotizar en mobile — ya está en la navbar y footer */
+    .hero-ctas .hero-btn-cotizar,
+    .hero-ctas a:last-child {
+      display: none;
+    }
+    /* El botón de WhatsApp ocupa toda la fila */
+    .hero-ctas a:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .hero-trust { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>

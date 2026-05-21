@@ -1,0 +1,291 @@
+---
+// src/components/layout/Footer.astro
+import { SITE, SERVICES, ZONES } from '../../lib/seo';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <!-- Cuerpo del footer -->
+  <div class="footer-body">
+    <div class="container footer-grid">
+
+      <!-- Columna 1: Info empresa -->
+      <div class="footer-col footer-col-wide">
+        <a href="/" class="footer-logo" aria-label="Plomeros SAOR">
+          <svg width="38" height="38" viewBox="0 0 100 110" fill="none">
+            <defs>
+              <linearGradient id="fDropGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#0B2240"/>
+                <stop offset="50%" stop-color="#1565C0"/>
+                <stop offset="100%" stop-color="#4FC3F7"/>
+              </linearGradient>
+              <linearGradient id="fInner" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#00B4D8"/>
+                <stop offset="100%" stop-color="#4FC3F7"/>
+              </linearGradient>
+            </defs>
+            <path d="M50 5 C50 5 15 45 15 65 C15 84 30.6 99 50 99 C69.4 99 85 84 85 65 C85 45 50 5 50 5Z" fill="url(#fDropGrad)"/>
+            <path d="M50 28 C50 28 34 52 34 64 C34 72.8 41.2 80 50 80 C58.8 80 66 72.8 66 64 C66 52 50 28 50 28Z" fill="url(#fInner)"/>
+            <circle cx="45" cy="62" r="4" fill="white" opacity="0.7"/>
+          </svg>
+          <div>
+            <div class="footer-brand-name">Plomeros Saor</div>
+            <div class="footer-brand-tag">Servicios locativos de calidad</div>
+          </div>
+        </a>
+        <p class="footer-desc">
+          Más de 10 años brindando servicios de plomería profesional en Cali, 
+          Jamundí, Palmira y Yumbo. Detección de fugas con geófono y cámara 
+          térmica, destape de cañerías y remodelación de baños.
+        </p>
+        <div class="footer-contact">
+          <a href={`tel:${SITE.phone1}`} class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-icon-brand">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.12-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            </svg>
+            {SITE.phone1}
+          </a>
+          <a href={`tel:${SITE.phone2}`} class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-icon-brand">
+              <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.12-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            </svg>
+            {SITE.phone2}
+          </a>
+          <a href={`mailto:${SITE.email}`} class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-icon-brand">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            {SITE.email}
+          </a>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="footer-icon-brand">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+            Cali, Valle del Cauca, Colombia
+          </div>
+        </div>
+        <!-- Redes sociales -->
+        <div class="footer-social">
+          <a href={SITE.facebook} target="_blank" rel="noopener" aria-label="Facebook" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          <a href={SITE.youtube} target="_blank" rel="noopener" aria-label="YouTube" class="social-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna 2: Servicios -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Servicios</h3>
+        <ul class="footer-links">
+          {SERVICES.map(s => (
+            <li>
+              <a href={s.slug} class="footer-link">
+                <span class="footer-link-arrow">→</span> {s.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Columna 3: Zonas + Links -->
+      <div class="footer-col">
+        <h3 class="footer-heading">Zonas de cobertura</h3>
+        <ul class="footer-links">
+          {ZONES.map(z => (
+            <li>
+              <a href={z.slug} class="footer-link">
+                <span class="footer-link-arrow">→</span> Plomeros en {z.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <h3 class="footer-heading" style="margin-top:1.5rem;">Empresa</h3>
+        <ul class="footer-links">
+          <li><a href="/about-plomeros-cali" class="footer-link"><span class="footer-link-arrow">→</span> Nosotros</a></li>
+          <li><a href="/blog-plomeros-en-cali" class="footer-link"><span class="footer-link-arrow">→</span> Blog</a></li>
+          <li><a href="/contacto" class="footer-link"><span class="footer-link-arrow">→</span> Contacto</a></li>
+          <li><a href="/videos-geofono-deteccion-de-fugas" class="footer-link"><span class="footer-link-arrow">→</span> Videos de trabajos</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© {currentYear} {SITE.name}. Todos los derechos reservados.</p>
+      <p>Diseñado con ❤️ para Cali, Colombia</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-navy);
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  /* Footer body */
+  .footer-body { padding: 4rem 0 2rem; }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.8fr 1fr 1fr;
+    gap: 3rem;
+  }
+
+  /* Logo en footer */
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    margin-bottom: 1rem;
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-brand);
+  }
+
+  .footer-brand-tag {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .footer-desc {
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 1.25rem;
+  }
+
+  /* Contacto */
+  .footer-contact {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-contact-item:hover { color: var(--color-brand); }
+
+  .footer-icon-brand { color: var(--color-brand); flex-shrink: 0; }
+
+  /* Social */
+  .footer-social {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.7);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    text-decoration: none;
+  }
+
+  .social-link:hover {
+    background: var(--color-brand);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  /* Links */
+  .footer-heading {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-brand);
+    margin-bottom: 0.875rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .footer-link {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-link:hover { color: var(--color-brand); }
+
+  .footer-link-arrow {
+    color: var(--color-brand);
+    font-size: 0.75rem;
+    opacity: 0.7;
+    transition: transform 0.2s ease;
+  }
+
+  .footer-link:hover .footer-link-arrow { transform: translateX(3px); }
+
+  /* Bottom */
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 1.25rem 0;
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer-col-wide {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-cta-inner { flex-direction: column; }
+    .footer-bottom-inner { flex-direction: column; text-align: center; }
+  }
+</style>

@@ -1,0 +1,158 @@
+---
+// src/pages/privacy-policy-reparar-fugas-de-agua.astro
+import Layout from '../layouts/Layout.astro';
+import { SITE, buildTitle } from '../lib/seo';
+---
+
+<Layout
+  title={buildTitle('Política de Privacidad — Plomeros SAOR')}
+  description="Política de privacidad de Plomeros SAOR. Información sobre el tratamiento de datos personales conforme a la Ley 1581 de 2012 de Colombia."
+  canonical="/privacy-policy-reparar-fugas-de-agua"
+>
+  <div style="padding-top:68px;" />
+
+  <section style="background:var(--color-bg-light);padding:3rem 0 1.5rem;">
+    <div class="container">
+      <h1 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;color:var(--color-navy);margin-bottom:0.5rem;">
+        Política de Privacidad
+      </h1>
+      <p style="color:var(--color-muted);font-size:0.9375rem;">
+        Última actualización: enero de 2025 · {SITE.name} · {SITE.url}
+      </p>
+    </div>
+  </section>
+
+  <section style="padding:2.5rem 0 5rem;">
+    <div class="container" style="max-width:800px;">
+
+      <div class="prose">
+        <h2>1. Responsable del tratamiento</h2>
+        <p>
+          <strong>{SITE.name}</strong>, con domicilio en {SITE.address}, es responsable del
+          tratamiento de los datos personales recopilados a través del sitio web
+          <a href={SITE.url}>{SITE.url}</a> y de los canales de contacto habilitados
+          (WhatsApp, correo electrónico, teléfono).
+        </p>
+        <p>
+          Correo de contacto: <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+          Teléfono: <a href={`tel:${SITE.phone1}`}>{SITE.phone1}</a>
+        </p>
+
+        <h2>2. Datos que recopilamos</h2>
+        <p>Recopilamos únicamente los datos que el usuario proporciona voluntariamente:</p>
+        <ul>
+          <li>Nombre y apellido</li>
+          <li>Número de teléfono o WhatsApp</li>
+          <li>Correo electrónico (cuando aplica)</li>
+          <li>Dirección del inmueble para prestación del servicio</li>
+          <li>Descripción del problema de plomería</li>
+        </ul>
+        <p>
+          No recopilamos datos sensibles, datos de menores de edad ni información financiera
+          a través de este sitio.
+        </p>
+
+        <h2>3. Finalidad del tratamiento</h2>
+        <p>Los datos personales son usados exclusivamente para:</p>
+        <ul>
+          <li>Responder consultas y solicitudes de servicio</li>
+          <li>Coordinar visitas técnicas y presupuestos</li>
+          <li>Enviar información sobre el estado del servicio contratado</li>
+          <li>Cumplir obligaciones legales y contractuales</li>
+        </ul>
+        <p>
+          No vendemos, cedemos ni compartimos sus datos con terceros para fines comerciales
+          o publicitarios.
+        </p>
+
+        <h2>4. Base legal del tratamiento</h2>
+        <p>
+          El tratamiento de datos se realiza con base en el consentimiento libre del titular,
+          conforme a la <strong>Ley 1581 de 2012</strong> (Protección de Datos Personales de
+          Colombia) y su decreto reglamentario 1377 de 2013.
+        </p>
+
+        <h2>5. Derechos del titular</h2>
+        <p>Como titular de sus datos personales, usted tiene derecho a:</p>
+        <ul>
+          <li>Conocer, actualizar y rectificar sus datos</li>
+          <li>Solicitar la supresión de sus datos cuando no exista obligación legal de conservarlos</li>
+          <li>Revocar la autorización otorgada para el tratamiento</li>
+          <li>Acceder gratuitamente a sus datos</li>
+          <li>Presentar quejas ante la Superintendencia de Industria y Comercio (SIC)</li>
+        </ul>
+        <p>
+          Para ejercer estos derechos, escríbenos a
+          <a href={`mailto:${SITE.email}`}>{SITE.email}</a> o contáctenos al
+          <a href={`tel:${SITE.phone1}`}>{SITE.phone1}</a>.
+        </p>
+
+        <h2>6. Cookies y tecnologías de seguimiento</h2>
+        <p>
+          Este sitio puede utilizar cookies de análisis (Google Analytics / Google Tag Manager)
+          para comprender el comportamiento de los visitantes y mejorar la experiencia de uso.
+          Las cookies no contienen información personal identificable. Puede desactivarlas desde
+          la configuración de su navegador.
+        </p>
+
+        <h2>7. Seguridad de los datos</h2>
+        <p>
+          Implementamos medidas técnicas y organizativas razonables para proteger los datos
+          personales contra acceso no autorizado, pérdida o alteración. Las comunicaciones
+          por WhatsApp están protegidas por el cifrado de extremo a extremo de la plataforma.
+        </p>
+
+        <h2>8. Vigencia de la política</h2>
+        <p>
+          Esta política puede actualizarse en cualquier momento. La versión vigente estará
+          siempre disponible en esta página. Los cambios sustanciales serán comunicados a
+          través de los canales habituales de contacto.
+        </p>
+
+        <h2>9. Contacto</h2>
+        <p>
+          Para cualquier consulta relacionada con esta política o el tratamiento de sus datos:
+        </p>
+        <ul>
+          <li>Correo: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
+          <li>WhatsApp: <a href={`https://wa.me/${SITE.whatsapp}`}>+{SITE.whatsapp}</a></li>
+          <li>Teléfono: <a href={`tel:${SITE.phone1}`}>{SITE.phone1}</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 2rem 0 0.75rem;
+  }
+  .prose p {
+    color: var(--color-muted);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 0.9375rem;
+  }
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .prose li {
+    color: var(--color-muted);
+    line-height: 1.75;
+    font-size: 0.9375rem;
+    margin-bottom: 0.25rem;
+  }
+  .prose a {
+    color: var(--color-brand);
+    text-decoration: underline;
+  }
+  .prose a:hover {
+    color: var(--color-navy);
+  }
+</style>

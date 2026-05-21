@@ -1,0 +1,73 @@
+---
+// src/pages/deteccion-de-fugas-de-agua-como-saber-si-en-mi-casa-tengo-una-fuga-de-agua.astro
+
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/shared/Breadcrumb.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import FAQAccordion from '../components/services/FAQAccordion';
+import { SITE, buildTitle } from '../lib/seo';
+
+const faqs = [
+  {
+    question: '¿Mi factura del agua subió sin razón — puede ser una fuga?',
+    answer: 'Sí, es la señal más común. Si tu consumo subió más del 20% sin un cambio en tus hábitos, probablemente tienes una fuga activa. Llama a un plomero para diagnóstico inmediato antes de que la próxima factura llegue.',
+  },
+  {
+    question: '¿Cómo saber si tengo una fuga de agua sin abrir nada?',
+    answer: 'Cierra todas las llaves de tu casa. Ve al medidor de agua (generalmente está en la calle o en el antejardín) y observa si el disco o el número sigue moviéndose. Si hay movimiento, hay una fuga activa. Otro indicador: manchas de humedad en paredes o pisos sin causa aparente.',
+  },
+  {
+    question: '¿Las fugas ocultas pueden dañar la estructura de la casa?',
+    answer: 'Sí, a largo plazo las fugas ocultas pueden debilitar la estructura, causar corrosión en el acero de refuerzo, propiciar el crecimiento de hongos y humedad, y en casos extremos comprometer los cimientos. Por eso es importante detectarlas y repararlas lo antes posible.',
+  },
+];
+---
+
+<Layout
+  title={buildTitle('Cómo Saber si Tengo una Fuga de Agua — Señales y Detección')}
+  description="¿Sospecha una fuga de agua oculta en su casa? Conozca las señales, cómo detectarla y cómo Plomeros SAOR la localiza sin demoler en Cali. ☎ 318 592 2585"
+  canonical="/deteccion-de-fugas-de-agua-como-saber-si-en-mi-casa-tengo-una-fuga-de-agua"
+>
+  <div style="padding-top:68px;" />
+
+  <div class="container" style="padding-top:2rem;padding-bottom:2rem;">
+    <Breadcrumb items={[{label:'Inicio',href:'/'},{label:'Servicios',href:'/plomeros-en-cali'},{label:'Detección de fugas'}]} />
+  </div>
+
+  <section style="background:var(--color-bg-light);padding:3rem 0 4rem;">
+    <div class="container">
+      <h1 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:800;color:var(--color-navy);line-height:1.2;margin-bottom:1rem;max-width:720px;">
+        ¿Cómo saber si en tu casa hay una fuga de agua oculta?
+      </h1>
+      <p style="font-size:1.0625rem;color:var(--color-muted);line-height:1.65;max-width:640px;margin-bottom:2rem;">
+        Una fuga no detectada puede triplicar tu factura del agua y dañar la estructura de tu hogar.
+        Aprende a identificar las señales y cómo la detectamos sin demoler.
+      </p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-bottom:2.5rem;">
+        {[
+          {icon:'💸', title:'Factura de agua elevada', desc:'Sube sin razón aparente mes a mes.'},
+          {icon:'💧', title:'Manchas de humedad', desc:'En paredes, pisos o techos sin causa visible.'},
+          {icon:'🔊', title:'Sonido de agua corriendo', desc:'Sin tener ninguna llave abierta.'},
+          {icon:'🦠', title:'Olor a moho o humedad', desc:'En zonas que debían estar secas.'},
+          {icon:'📊', title:'Medidor que gira solo', desc:'Con todas las llaves cerradas.'},
+          {icon:'🌿', title:'Zona verde sin regar', desc:'Un parche de jardín más verde que el resto.'},
+        ].map(s => (
+          <div style="background:white;border-radius:var(--radius-lg);padding:1.5rem;box-shadow:var(--shadow-sm);border:1px solid rgba(0,180,216,0.08);">
+            <div style="font-size:1.75rem;margin-bottom:0.5rem;">{s.icon}</div>
+            <h3 style="font-weight:700;color:var(--color-navy);font-size:0.9375rem;margin-bottom:0.25rem;">{s.title}</h3>
+            <p style="font-size:0.8125rem;color:var(--color-muted);">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;">
+        <a href="/servicio-geofono-cali" class="btn btn-primary btn-lg">Ver servicio de geófono →</a>
+        <a href={`tel:${SITE.phone1}`} class="btn btn-secondary btn-lg">📞 {SITE.phone1}</a>
+      </div>
+    </div>
+  </section>
+
+  <FAQAccordion faqs={faqs} title="Preguntas sobre detección de fugas" client:visible />
+  <CTAEmergency />
+</Layout>

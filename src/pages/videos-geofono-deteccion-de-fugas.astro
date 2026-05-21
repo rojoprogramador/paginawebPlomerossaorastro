@@ -1,0 +1,70 @@
+---
+// src/pages/videos-geofono-deteccion-de-fugas.astro
+
+import Layout from '../layouts/Layout.astro';
+import Breadcrumb from '../components/shared/Breadcrumb.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { buildTitle, SITE } from '../lib/seo';
+---
+
+<Layout
+  title={buildTitle('Videos Geófono — Detección de Fugas en Cali · Plomeros SAOR')}
+  description="Videos reales de detección de fugas con geófono y cámara térmica en Cali. Trabajos reales de Plomeros SAOR. Ver cómo trabajamos antes de contratar."
+  canonical="/videos-geofono-deteccion-de-fugas"
+>
+  <div style="padding-top:68px;" />
+
+  <section style="background:var(--color-navy);padding:3.5rem 0;">
+    <div class="container">
+      <Breadcrumb items={[{label:'Inicio',href:'/'},{label:'Videos'}]} />
+      <h1 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:800;color:white;line-height:1.15;margin:1rem 0 0.75rem;">
+        Videos Reales — <span style="color:var(--color-brand);">Geófono en Cali</span>
+      </h1>
+      <p style="font-size:1rem;color:rgba(255,255,255,0.75);max-width:580px;line-height:1.65;">
+        Mira nuestros trabajos reales de detección de fugas con geófono y cámara térmica en Cali.
+        Verificá cómo trabajamos antes de contratarnos.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <!-- Video placeholders -->
+      <!-- VIDEOS PENDIENTES: Agrega tus videos reales aquí
+           Puedes usar videos de YouTube (embed) o archivos mp4 locales
+           Tamaño recomendado: 1280x720px mínimo, formato mp4 -->
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;">
+        {Array.from({length: 6}).map((_, i) => (
+          <div style="background:var(--color-navy);border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(0,180,216,0.3);">
+            <div style="text-align:center;color:rgba(255,255,255,0.5);">
+              <div style="font-size:3rem;margin-bottom:0.5rem;">🎬</div>
+              <p style="font-size:0.8125rem;">Video {i+1}: trabajo real con geófono<br/>
+              <span style="font-size:0.75rem;opacity:0.7;">/videos/geofono-trabajo-{i+1}.mp4</span></p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Canal YouTube -->
+      <div style="margin-top:3rem;text-align:center;padding:2.5rem;background:var(--color-bg-light);border-radius:var(--radius-xl);">
+        <div style="font-size:2.5rem;margin-bottom:0.75rem;">▶️</div>
+        <h2 style="font-size:1.375rem;font-weight:800;color:var(--color-navy);margin-bottom:0.5rem;">
+          Ver más videos en YouTube
+        </h2>
+        <p style="color:var(--color-muted);margin-bottom:1.25rem;font-size:0.9375rem;">
+          Suscríbete a nuestro canal para ver todos nuestros trabajos con geófono y cámara térmica en Cali.
+        </p>
+        <a
+          href={SITE.youtube}
+          class="btn btn-primary btn-lg"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Ver canal de YouTube →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CTAEmergency />
+</Layout>

@@ -1,0 +1,37 @@
+---
+// src/pages/plomeros-en-cali.astro — Hub de servicios Cali
+
+import Layout from '../layouts/Layout.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+---
+
+<Layout
+  title={buildTitle('Plomeros en Cali — Servicios Profesionales · Plomeros SAOR')}
+  description="Plomeros profesionales en Cali: destape de cañerías, detección de fugas con geófono, cámara térmica, remodelación de baños e instalación de tuberías. ☎ 318 592 2585."
+  canonical="/plomeros-en-cali"
+>
+  <div style="padding-top:68px;" />
+
+  <section style="background:linear-gradient(135deg,var(--color-navy),#0f3460);padding:4rem 0;">
+    <div class="container" style="text-align:center;">
+      <span class="badge badge-brand" style="margin-bottom:1rem;display:inline-block;">Cali, Valle del Cauca</span>
+      <h1 style="font-size:clamp(2.25rem,5vw,3.25rem);font-weight:800;color:white;line-height:1.15;margin-bottom:1rem;">
+        Plomeros en Cali —<br>
+        <span style="color:var(--color-brand);">Todos Nuestros Servicios</span>
+      </h1>
+      <p style="font-size:1.125rem;color:rgba(255,255,255,0.8);max-width:640px;margin:0 auto 2rem;line-height:1.65;">
+        Más de 6 años resolviendo problemas de plomería en todas las comunas de Cali.
+        Tecnología avanzada, respuesta rápida y garantía en cada trabajo.
+      </p>
+      <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+        <a href={`tel:${SITE.phone1}`} class="btn btn-primary btn-lg">📞 {SITE.phone1}</a>
+        <a href={`https://wa.me/${SITE.whatsapp}`} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <ServicesGrid />
+  <CTAEmergency />
+</Layout>

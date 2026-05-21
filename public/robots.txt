@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Bloquear acceso a la API
+Disallow: /api/
+
+Sitemap: https://www.plomerossaor.com/sitemap.xml

@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const z = require\\('c:/Users/User/Desktop/WebPlomerossaorAstro/node_modules/zod'\\); console.log\\(z.version || 'no version export'\\); const s = z.z || z; console.log\\(typeof s.string\\)\")"
+    ]
+  }
+}

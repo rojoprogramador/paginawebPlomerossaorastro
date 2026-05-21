@@ -1,0 +1,117 @@
+---
+// src/layouts/Layout.astro
+// Layout principal — head, GTM, schema JSON-LD, nav, footer
+
+import '../styles/global.css';
+import Navbar from '../components/layout/Navbar.astro';
+import Footer from '../components/layout/Footer.astro';
+import WhatsAppButton from '../components/layout/WhatsAppButton';
+import { SITE, getLocalBusinessSchema } from '../lib/seo';
+import type { PageSEO } from '../lib/seo';
+
+interface Props extends PageSEO {
+  schema?: Record<string, unknown>;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = SITE.ogImage,
+  noindex = false,
+  schema,
+} = Astro.props;
+
+const canonicalURL = canonical
+  ? `${SITE.url}${canonical}`
+  : `${SITE.url}${Astro.url.pathname}`;
+
+const schemaData = schema ?? getLocalBusinessSchema();
+
+// GTM ID desde variable de entorno
+// Para producción: agrega GTM-XXXXXXX en el VPS en la variable PUBLIC_GTM_ID
+const GTM_ID = import.meta.env.PUBLIC_GTM_ID;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO Principal -->
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+  {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={`${SITE.url}${ogImage}`} />
+  <meta property="og:locale"      content="es_CO" />
+  <meta property="og:site_name"   content={SITE.name} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image"       content={`${SITE.url}${ogImage}`} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+
+  <!-- Schema JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+  <!-- Google Tag Manager -->
+  <!-- ================================================
+    CÓMO CONFIGURAR GTM:
+    1. Ve a https://tagmanager.google.com y crea una cuenta
+    2. Crea un contenedor para "plomerossaor.com"
+    3. Copia el ID (GTM-XXXXXXX) y ponlo en la variable de entorno PUBLIC_GTM_ID
+    4. En GTM, crea los siguientes triggers:
+       - Trigger "whatsapp_click": Evento personalizado = "whatsapp_click"
+       - Trigger "form_submit_contacto": Evento personalizado = "form_submit_contacto"
+       - Trigger "phone_click": Tipo = Clic en elemento, URL contenga "tel:"
+    5. Conecta GA4 y Google Ads como etiquetas
+  ================================================ -->
+  {GTM_ID && (
+    <script
+      set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${GTM_ID}');`}
+    />
+  )}
+</head>
+
+<body>
+  <!-- GTM noscript (va justo después de <body>) -->
+  {GTM_ID && (
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+      />
+    </noscript>
+  )}
+
+  <Navbar />
+
+  <main>
+    <slot />
+  </main>
+
+  <Footer />
+
+  <!-- WhatsApp flotante — Island React con animación pulse -->
+  <WhatsAppButton client:idle />
+</body>
+</html>

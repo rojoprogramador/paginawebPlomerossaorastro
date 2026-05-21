@@ -1,0 +1,33 @@
+---
+// src/pages/plomeros-jamundi.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHero from '../assets/cities/jamundi-hero.jpg';
+---
+
+<Layout
+  title={buildTitle('Plomeros en Jamundí — Servicio 24 Horas · Plomeros SAOR')}
+  description="Plomeros profesionales en Jamundí. Destape de cañerías, detección de fugas con geófono y cámara térmica. Respuesta en menos de 1 hora. ☎ 318 592 2585."
+  canonical="/plomeros-jamundi"
+>
+  <div style="padding-top:68px;" />
+  <ServiceHero
+    title="Plomeros en <span class='text-gradient-brand'>Jamundí</span>"
+    subtitle="Atendemos Jamundí y todo el municipio. Detección de fugas, destape, instalaciones y remodelación de baños. Respuesta en menos de 1 hora."
+    badgeLabel="📍 Jamundí"
+    badgeColor="brand"
+    imageSrc={imgHero}
+    imageAlt="Plomeros SAOR atendiendo en Jamundí, Valle del Cauca"
+    whatsappText="Hola, necesito un plomero en Jamundí"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Jamundí' },
+    ]}
+  />
+  <ServicesGrid />
+  <CTAEmergency />
+</Layout>

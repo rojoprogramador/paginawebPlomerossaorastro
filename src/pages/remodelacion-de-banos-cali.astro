@@ -1,0 +1,100 @@
+---
+// src/pages/remodelacion-de-banos-cali.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { Image } from 'astro:assets';
+import { buildTitle } from '../lib/seo';
+import imgHero from '../assets/services/remodelacion-banos.jpg';
+---
+
+<Layout
+  title={buildTitle('Remodelación de Baños en Cali — Llave en Mano · Plomeros SAOR')}
+  description="Remodelamos baños en Cali: tubería, enchape, sanitarios e instalaciones. Servicio llave en mano con garantía. Plomeros SAOR ☎ 318 592 2585."
+  canonical="/remodelacion-de-banos-cali"
+>
+  <ServiceHero
+    title="Remodelación de Baños en <span class='text-gradient-brand'>Cali</span>"
+    subtitle="Transformamos tu baño completo: cambio de tubería, instalación de enchape, sanitarios, grifería y accesorios. Servicio llave en mano con garantía."
+    badgeLabel="🛁 Transformación completa"
+    badgeColor="brand"
+    imageSrc={imgHero}
+    imageAlt="Remodelación de baños en Cali — Plomeros SAOR"
+    whatsappText="Hola, necesito cotizar una remodelación de baño en Cali"
+    ctaLabel="Cotizar remodelación →"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Servicios', href: '/plomeros-en-cali' },
+      { label: 'Remodelación de baños' },
+    ]}
+  />
+
+  <section class="section">
+    <div class="container">
+      <h2 style="font-size:clamp(1.5rem,3.5vw,2rem);font-weight:800;color:var(--color-navy);text-align:center;margin-bottom:2rem;">
+        ¿Qué incluye la remodelación?
+      </h2>
+      <div class="remod-grid">
+        {[
+          {icon:'🔧', title:'Plomería completa', desc:'Reposición y modificación de toda la red de agua y desagüe.'},
+          {icon:'🧱', title:'Enchape y cerámica', desc:'Instalación de baldosa, porcelanato y mosaicos.'},
+          {icon:'🚽', title:'Sanitarios y lavamanos', desc:'Instalación de aparatos nuevos o reubicación.'},
+          {icon:'🚿', title:'Grifería y accesorios', desc:'Duchas, llaves de paso, mezcladores y accesorios.'},
+          {icon:'💡', title:'Iluminación básica', desc:'Instalación de puntos de luz y ventilación.'},
+          {icon:'📋', title:'Llave en mano', desc:'Entregamos el baño terminado, limpio y listo para usar.'},
+        ].map(i => (
+          <div class="card" style="padding:1.5rem;">
+            <div style="font-size:1.75rem;margin-bottom:0.625rem;">{i.icon}</div>
+            <h3 style="font-weight:700;color:var(--color-navy);font-size:0.9375rem;margin-bottom:0.25rem;">{i.title}</h3>
+            <p style="font-size:0.8125rem;color:var(--color-muted);line-height:1.5;">{i.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:3rem 0;background:var(--color-bg-light);">
+    <div class="container" style="text-align:center;">
+      <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:800;color:var(--color-navy);margin-bottom:1rem;">
+        Galería de remodelaciones
+      </h2>
+      <p style="color:var(--color-muted);margin-bottom:2rem;">Trabajos reales realizados en Cali — antes y después</p>
+      <div class="gallery-grid">
+        {Array.from({length:6}).map((_,i) => (
+          <Image
+            src={`/images/services/remodelacion/remodelacion-${i+1}.jpg`}
+            alt={`Trabajo real de remodelación de baño en Cali #${i+1}`}
+            width={480}
+            height={200}
+            style="width:100%; height:200px; object-fit:cover; border-radius:var(--radius-md);"
+            loading="lazy"
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTAEmergency />
+</Layout>
+
+<style>
+  .remod-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 768px) {
+    .remod-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .remod-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+// src/pages/plomeros-palmira.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHero from '../assets/cities/palmira-hero.jpg';
+---
+
+<Layout
+  title={buildTitle('Plomeros en Palmira — Servicio 24 Horas · Plomeros SAOR')}
+  description="Plomeros profesionales en Palmira, Valle del Cauca. Destape, geófono, cámara térmica e instalaciones. Respuesta rápida. ☎ 318 592 2585."
+  canonical="/plomeros-palmira"
+>
+  <div style="padding-top:68px;" />
+  <ServiceHero
+    title="Plomeros en <span class='text-gradient-brand'>Palmira</span>"
+    subtitle="Servicio de plomería en Palmira y toda la ciudad. Geófono, cámara térmica, destape de cañerías e instalaciones con garantía."
+    badgeLabel="📍 Palmira"
+    badgeColor="brand"
+    imageSrc={imgHero}
+    imageAlt="Plomeros SAOR atendiendo en Palmira, Valle del Cauca"
+    whatsappText="Hola, necesito un plomero en Palmira"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Palmira' },
+    ]}
+  />
+  <ServicesGrid />
+  <CTAEmergency />
+</Layout>

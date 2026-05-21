@@ -1,0 +1,199 @@
+---
+// src/components/home/AreasCoverage.astro
+import SectionTitle from '../shared/SectionTitle.astro';
+
+const zones = [
+  {
+    name: 'Cali',
+    href: '/plomeros-en-cali',
+    desc: 'Ciudad principal · Atendemos todas las comunas',
+    icon: '🏙️',
+    highlight: true,
+  },
+  {
+    name: 'Jamundí',
+    href: '/plomeros-jamundi',
+    desc: 'Municipio sur del Valle del Cauca',
+    icon: '🏘️',
+    highlight: false,
+  },
+  {
+    name: 'Palmira',
+    href: '/plomeros-palmira',
+    desc: 'Capital azucarera del Valle',
+    icon: '🌿',
+    highlight: false,
+  },
+  {
+    name: 'Yumbo',
+    href: '/plomeros-yumbo',
+    desc: 'Zona industrial norte de Cali',
+    icon: '🏭',
+    highlight: false,
+  },
+];
+
+const comunas = [
+  'El Poblado', 'Ciudad Jardín', 'Unicentro', 'Limonar', 'Pance',
+  'Granada', 'San Fernando', 'Chipichape', 'Ciudad 2000', 'Simón Bolívar',
+  'El Ingenio', 'Meléndez', 'Valle del Lili', 'La Hacienda', 'Tequendama',
+];
+---
+
+<section class="section" id="zonas-cobertura">
+  <div class="container">
+    <SectionTitle
+      badge="Zonas de cobertura"
+      title="Servicio en toda <span class='text-gradient-brand'>Cali</span> y alrededores"
+      subtitle="Llegamos a tu barrio. Cobertura completa en las 22 comunas de Cali y municipios vecinos."
+      center={true}
+    />
+
+    <!-- Municipios principales -->
+    <div class="zones-grid">
+      {zones.map(z => (
+        <a href={z.href} class:list={['zone-card', { 'zone-card-highlight': z.highlight }]}>
+          <span class="zone-icon">{z.icon}</span>
+          <h3 class="zone-name">{z.name}</h3>
+          <p class="zone-desc">{z.desc}</p>
+          <span class="zone-link-text">Ver servicios →</span>
+        </a>
+      ))}
+    </div>
+
+    <!-- Comunas de Cali -->
+    <div class="comunas-section">
+      <h3 class="comunas-title">Barrios y comunas en Cali</h3>
+      <div class="comunas-grid">
+        {comunas.map(c => (
+          <span class="comuna-tag">📍 {c}</span>
+        ))}
+        <span class="comuna-tag comarca-more">+ Todos los barrios</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .zones-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+  }
+
+  .zone-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.25rem;
+    border-radius: var(--radius-lg);
+    background: white;
+    border: 2px solid rgba(0, 180, 216, 0.1);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    transition: all 0.25s ease;
+    color: inherit;
+  }
+
+  .zone-card:hover {
+    border-color: var(--color-brand);
+    box-shadow: var(--shadow-brand);
+    transform: translateY(-4px);
+  }
+
+  .zone-card-highlight {
+    background: linear-gradient(135deg, var(--color-navy), var(--color-mid-blue));
+    border-color: transparent;
+    color: white;
+  }
+
+  .zone-card-highlight:hover {
+    box-shadow: 0 12px 36px rgba(11, 34, 64, 0.3);
+  }
+
+  .zone-icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .zone-name {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 0.25rem;
+  }
+
+  .zone-card-highlight .zone-name { color: white; }
+
+  .zone-desc {
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+    margin-bottom: 0.875rem;
+  }
+
+  .zone-card-highlight .zone-desc { color: rgba(255,255,255,0.7); }
+
+  .zone-link-text {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-brand);
+    transition: gap 0.2s ease;
+  }
+
+  .zone-card-highlight .zone-link-text { color: #4FC3F7; }
+
+  /* Comunas */
+  .comunas-section {
+    background: var(--color-bg-light);
+    border-radius: var(--radius-xl);
+    padding: 2rem;
+    border: 1px solid rgba(0, 180, 216, 0.1);
+  }
+
+  .comunas-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .comunas-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .comuna-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.3rem 0.75rem;
+    background: white;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    color: var(--color-muted);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    cursor: default;
+  }
+
+  .comarca-more {
+    background: var(--color-brand);
+    color: white;
+    border-color: transparent;
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .zones-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .zones-grid { grid-template-columns: 1fr; }
+  }
+</style>

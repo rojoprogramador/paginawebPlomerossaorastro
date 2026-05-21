@@ -1,0 +1,201 @@
+---
+// src/pages/blog-plomeros-en-cali/[slug].astro
+// Post individual de blog — schema Article + BreadcrumbList
+// GTM: scroll depth tracking via tag en Layout
+
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import Breadcrumb from '../../components/shared/Breadcrumb.astro';
+import CTAEmergency from '../../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../../lib/seo';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts
+    .filter(p => !p.data.draft)
+    .map(post => ({
+      // post.id es ej: 'senales-fuga-agua-oculta.mdx' — strip extension
+      params: { slug: post.id.replace(/\.(md|mdx)$/, '') },
+      props: { post },
+    }));
+}
+
+interface Props { post: CollectionEntry<'blog'>; }
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.date.toISOString(),
+  image: `${SITE.url}${post.data.image}`,
+  author: {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE.name,
+    url: SITE.url,
+  },
+};
+---
+
+<Layout
+  title={buildTitle(post.data.title)}
+  description={post.data.description}
+  canonical={`/blog-plomeros-en-cali/${post.id.replace(/\.(md|mdx)$/, '')}`}
+  ogImage={post.data.image}
+  schema={articleSchema}
+>
+  <div style="padding-top:68px;" />
+
+  <article style="max-width:760px;margin:0 auto;padding:2rem 1.5rem 5rem;">
+    <Breadcrumb items={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Blog', href: '/blog-plomeros-en-cali' },
+      { label: post.data.title },
+    ]} />
+
+    <header style="margin:1.5rem 0 2rem;">
+      <div style="font-size:0.8125rem;color:var(--color-muted);margin-bottom:0.625rem;">
+        {formatDate(post.data.date)} · Por {post.data.author}
+      </div>
+      <h1 style="font-size:clamp(1.75rem,4vw,2.5rem);font-weight:800;color:var(--color-navy);line-height:1.2;margin-bottom:0.75rem;">
+        {post.data.title}
+      </h1>
+      <p style="font-size:1.0625rem;color:var(--color-muted);line-height:1.65;">
+        {post.data.description}
+      </p>
+
+      <Image
+        src={post.data.image}
+        alt={post.data.imageAlt}
+        width={720}
+        height={400}
+        class="post-hero-img"
+        loading="eager"
+      />
+    </header>
+
+    <!-- Contenido MDX -->
+    <div class="blog-content">
+      <Content />
+    </div>
+
+    <!-- CTA WhatsApp al final del post -->
+    <div style="background:linear-gradient(135deg,var(--color-navy),#0f3460);border-radius:var(--radius-xl);padding:2rem;margin-top:3rem;text-align:center;">
+      <h2 style="color:white;font-size:1.375rem;font-weight:800;margin-bottom:0.5rem;">
+        ¿Tienes este problema en tu casa?
+      </h2>
+      <p style="color:rgba(255,255,255,0.75);font-size:0.9375rem;margin-bottom:1.5rem;">
+        Contáctanos ahora. Respuesta en menos de 1 hora en Cali y alrededores.
+      </p>
+      <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;">
+        <a
+          href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hola, leí tu artículo "${post.data.title}" y necesito ayuda`)}`}
+          class="btn btn-whatsapp btn-lg"
+          target="_blank" rel="noopener"
+        >WhatsApp ahora</a>
+        <a href={`tel:${SITE.phone1}`} class="btn btn-primary btn-lg">📞 Llamar</a>
+      </div>
+    </div>
+  </article>
+
+  <CTAEmergency />
+</Layout>
+
+<style is:global>
+  /* Estilos para el contenido MDX del blog */
+  .blog-content {
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .blog-content h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin: 2rem 0 0.875rem;
+  }
+
+  .blog-content h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 1.5rem 0 0.625rem;
+  }
+
+  .blog-content p {
+    margin-bottom: 1.25rem;
+    color: #374151;
+  }
+
+  .blog-content ul, .blog-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .blog-content li {
+    margin-bottom: 0.375rem;
+    color: #374151;
+  }
+
+  .blog-content strong {
+    color: var(--color-navy);
+    font-weight: 700;
+  }
+
+  .blog-content a {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .blog-content blockquote {
+    border-left: 4px solid var(--color-brand);
+    background: rgba(0,180,216,0.06);
+    padding: 1rem 1.25rem;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: var(--color-navy);
+  }
+
+  .blog-content img {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    margin: 1.5rem 0;
+    width: 100%;
+  }
+
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
+  }
+
+  .post-hero-img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    margin-top: 1.5rem;
+    display: block;
+  }
+
+  /* Fallback cuando la imagen no existe */
+  .post-hero-img.img-missing {
+    background: linear-gradient(135deg, var(--color-navy) 0%, #1565c0 100%);
+    min-height: 380px;
+  }
+</style>

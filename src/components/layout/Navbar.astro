@@ -1,0 +1,438 @@
+---
+// src/components/layout/Navbar.astro
+import { SITE, SERVICES, ZONES } from '../../lib/seo';
+---
+
+<header id="navbar" class="navbar">
+  <div class="container navbar-inner">
+
+    <!-- Logo -->
+    <a href="/" class="navbar-logo" aria-label="Plomeros SAOR — Inicio">
+      <img
+        src="/images/logo/logo-plomeros-saor.png"
+        alt="Plomeros SAOR — Servicios locativos de calidad"
+        height="56"
+        loading="eager"
+        class="navbar-logo-img"
+      />
+    </a>
+
+    <!-- Navigation Desktop -->
+    <nav class="navbar-nav" aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li><a href="/" class="nav-link">Inicio</a></li>
+        
+        <!-- Mega menú Servicios -->
+        <li class="nav-item-dropdown">
+          <button class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" id="services-menu-btn">
+            Servicios
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="mega-menu" id="services-mega-menu" role="menu">
+            <div class="mega-menu-inner">
+              {SERVICES.map(s => (
+                <a href={s.slug} class="mega-menu-item" role="menuitem">
+                  <span class="mega-menu-icon">{s.icon}</span>
+                  <span>{s.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </li>
+
+        <!-- Zonas -->
+        <li class="nav-item-dropdown">
+          <button class="nav-link nav-trigger" aria-expanded="false" aria-haspopup="true" id="zones-menu-btn">
+            Zonas
+            <svg class="chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="m6 9 6 6 6-6"/>
+            </svg>
+          </button>
+          <div class="dropdown-menu" id="zones-dropdown" role="menu">
+            {ZONES.map(z => (
+              <a href={z.slug} class="dropdown-item" role="menuitem">{z.name}</a>
+            ))}
+          </div>
+        </li>
+
+        <li><a href="/blog-plomeros-en-cali" class="nav-link">Blog</a></li>
+        <li><a href="/about-plomeros-cali" class="nav-link">Nosotros</a></li>
+      </ul>
+    </nav>
+
+    <!-- CTA Desktop -->
+    <div class="navbar-cta">
+      <a
+        href={`tel:${SITE.phone1}`}
+        class="btn btn-sm btn-secondary"
+        id="navbar-phone-btn"
+      >
+        <!-- GTM: trigger phone_click -->
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.12-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+        </svg>
+        {SITE.phone1}
+      </a>
+      <a href="/contacto" class="btn btn-sm btn-primary">Cotizar ahora</a>
+    </div>
+
+    <!-- Hamburger mobile -->
+    <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <nav>
+      <a href="/" class="mobile-link">Inicio</a>
+      <div class="mobile-section-title">Servicios</div>
+      {SERVICES.map(s => (
+        <a href={s.slug} class="mobile-link mobile-link-indent">
+          <span>{s.icon}</span> {s.name}
+        </a>
+      ))}
+      <div class="mobile-section-title">Zonas</div>
+      {ZONES.map(z => (
+        <a href={z.slug} class="mobile-link mobile-link-indent">{z.name}</a>
+      ))}
+      <a href="/blog-plomeros-en-cali" class="mobile-link">Blog</a>
+      <a href="/about-plomeros-cali" class="mobile-link">Nosotros</a>
+      <a href="/contacto" class="mobile-link">Contacto</a>
+      <div class="mobile-ctas">
+        <a href={`tel:${SITE.phone1}`} class="btn btn-primary" style="width:100%;justify-content:center;">
+          Llamar ahora
+        </a>
+        <a href={`https://wa.me/${SITE.whatsapp}`} class="btn btn-whatsapp" style="width:100%;justify-content:center;" target="_blank" rel="noopener">
+          WhatsApp
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(11, 34, 64, 0.1);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    background: #ffffff;
+    box-shadow: 0 4px 20px rgba(11, 34, 64, 0.08);
+  }
+
+  .navbar-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 80px; /* Un poco más de altura para el logo grande */
+  }
+
+  /* Logo */
+  .navbar-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .navbar-logo-img {
+    height: 56px;
+    width: auto;
+    display: block;
+  }
+
+  .navbar-brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    line-height: 1.1;
+  }
+
+  .brand-tagline {
+    font-size: 0.6875rem;
+    color: var(--color-muted);
+    line-height: 1;
+  }
+
+  /* Nav */
+  .navbar-nav { flex: 1; }
+
+  .nav-list {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0.875rem;
+    color: var(--color-navy);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0.875rem;
+    right: 0.875rem;
+    height: 2px;
+    background: var(--color-brand);
+    border-radius: 1px;
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus {
+    color: var(--color-brand);
+    background: rgba(0, 180, 216, 0.08);
+  }
+
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  .chevron {
+    transition: transform 0.2s ease;
+  }
+
+  /* Dropdown base */
+  .nav-item-dropdown { position: relative; }
+
+  .mega-menu,
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: 0 16px 48px rgba(11, 34, 64, 0.2);
+    border: 1px solid rgba(0, 180, 216, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 200;
+  }
+
+  .nav-item-dropdown:hover .mega-menu,
+  .nav-item-dropdown:hover .dropdown-menu,
+  .nav-item-dropdown:focus-within .mega-menu,
+  .nav-item-dropdown:focus-within .dropdown-menu {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .nav-item-dropdown:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Mega menú */
+  .mega-menu { width: 380px; }
+
+  .mega-menu-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+    padding: 0.75rem;
+  }
+
+  .mega-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+    text-decoration: none;
+  }
+
+  .mega-menu-item:hover {
+    background: rgba(0, 180, 216, 0.08);
+    color: var(--color-brand);
+  }
+
+  .mega-menu-icon { font-size: 1rem; }
+
+  /* Dropdown simple */
+  .dropdown-menu {
+    width: 180px;
+    padding: 0.5rem;
+  }
+
+  .dropdown-item {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--color-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+    text-decoration: none;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(0, 180, 216, 0.08);
+    color: var(--color-brand);
+  }
+
+  /* CTA */
+  .navbar-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    flex-shrink: 0;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    margin-left: auto;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-navy);
+    border-radius: 1px;
+    transition: all 0.25s ease;
+  }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile menu */
+  .mobile-menu {
+    display: none;
+    background: var(--color-navy);
+    border-top: 1px solid rgba(0, 180, 216, 0.15);
+    padding: 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .mobile-menu.open {
+    max-height: 600px;
+  }
+
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 0;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .mobile-link:hover { color: var(--color-brand); }
+  .mobile-link-indent { padding-left: 1.25rem; font-size: 0.875rem; }
+
+  .mobile-section-title {
+    color: var(--color-brand);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0.75rem 0 0.25rem;
+  }
+
+  .mobile-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  @media (max-width: 1024px) {
+    .navbar-nav { display: none; }
+    .navbar-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+  }
+
+  @media (max-width: 480px) {
+    .brand-tagline { display: none; }
+  }
+</style>
+
+<script>
+  // Scroll effect en navbar
+  const navbar = document.getElementById('navbar');
+  const observer = new IntersectionObserver(
+    ([entry]) => navbar?.classList.toggle('scrolled', !entry.isIntersecting),
+    { rootMargin: '-68px 0px 0px 0px' }
+  );
+  const sentinel = document.createElement('div');
+  sentinel.style.height = '1px';
+  document.body.prepend(sentinel);
+  observer.observe(sentinel);
+
+  // Hamburger
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const mobileMenu   = document.getElementById('mobile-menu');
+
+  hamburgerBtn?.addEventListener('click', () => {
+    const isOpen = hamburgerBtn.classList.toggle('open');
+    mobileMenu?.classList.toggle('open', isOpen);
+    hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
+    mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Cerrar menú mobile al hacer clic en un link
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburgerBtn?.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      hamburgerBtn?.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>

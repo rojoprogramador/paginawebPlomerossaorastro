@@ -1,0 +1,33 @@
+---
+// src/pages/plomeros-yumbo.astro
+
+import Layout from '../layouts/Layout.astro';
+import ServiceHero from '../components/shared/ServiceHero.astro';
+import ServicesGrid from '../components/home/ServicesGrid.astro';
+import CTAEmergency from '../components/home/CTAEmergency.astro';
+import { SITE, buildTitle } from '../lib/seo';
+import imgHero from '../assets/cities/yumbo-hero.jpg';
+---
+
+<Layout
+  title={buildTitle('Plomeros en Yumbo — Servicio Industrial y Residencial · Plomeros SAOR')}
+  description="Plomeros en Yumbo. Atendemos zona industrial y residencial. Destape, geófono y cámara térmica. Respuesta rápida desde Cali. ☎ 318 592 2585."
+  canonical="/plomeros-yumbo"
+>
+  <div style="padding-top:68px;" />
+  <ServiceHero
+    title="Plomeros en <span class='text-gradient-brand'>Yumbo</span>"
+    subtitle="Servicio de plomería en Yumbo: zona industrial norte y sector residencial. Destape, fugas, instalaciones y remodelaciones."
+    badgeLabel="📍 Yumbo"
+    badgeColor="brand"
+    imageSrc={imgHero}
+    imageAlt="Plomeros SAOR atendiendo en Yumbo, Valle del Cauca"
+    whatsappText="Hola, necesito un plomero en Yumbo"
+    breadcrumbs={[
+      { label: 'Inicio', href: '/' },
+      { label: 'Yumbo' },
+    ]}
+  />
+  <ServicesGrid />
+  <CTAEmergency />
+</Layout>
