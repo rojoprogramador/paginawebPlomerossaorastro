@@ -5,6 +5,7 @@ import react from '@astrojs/react';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 // En Astro 5, output:'static' es el default.
@@ -12,6 +13,8 @@ import sitemap from '@astrojs/sitemap';
 // y en producción se necesita un adaptador (node, vercel, etc.)
 export default defineConfig({
   site: 'https://www.plomerossaor.com',
+  output: 'server',
+  adapter: node({ mode: 'standalone' }),
 
   integrations: [
     react(),
