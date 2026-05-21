@@ -257,14 +257,17 @@ export default function Testimonials() {
                 onClick={() => goTo(i)}
                 aria-label={`Testimonio ${i + 1}`}
                 style={{
-                  width:      i === current ? 24 : 8,
-                  height:     8,
-                  borderRadius: 4,
-                  background: i === current ? '#00B4D8' : 'rgba(0,180,216,0.25)',
-                  border:     'none',
-                  cursor:     'pointer',
-                  transition: 'all 0.3s ease',
-                  padding:    0,
+                  width:           8,
+                  height:          8,
+                  borderRadius:    4,
+                  background:      '#00B4D8',
+                  opacity:         i === current ? 1 : 0.25,
+                  transform:       i === current ? 'scaleX(3)' : 'scaleX(1)',
+                  transformOrigin: 'left center',
+                  border:          'none',
+                  cursor:          'pointer',
+                  transition:      'transform 0.3s ease, opacity 0.3s ease',
+                  padding:         0,
                 }}
               />
             ))}

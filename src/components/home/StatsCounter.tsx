@@ -123,7 +123,6 @@ export default function StatsCounter() {
                 opacity: inView ? 1 : 0,
                 transform: inView ? 'translateY(0)' : 'translateY(24px)',
                 transition: `opacity 0.5s ease ${i * 0.1}s, transform 0.5s ease ${i * 0.1}s`,
-                backdropFilter: 'blur(8px)',
               }}
             >
               <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>
