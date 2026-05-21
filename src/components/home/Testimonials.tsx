@@ -109,7 +109,7 @@ export default function Testimonials() {
               display: 'inline-block',
               background: 'rgba(0,180,216,0.1)',
               border: '1px solid rgba(0,180,216,0.3)',
-              color: '#00B4D8',
+              color: '#0B2240',
               padding: '0.3rem 1rem',
               borderRadius: 99,
               fontSize: '0.8125rem',
@@ -130,7 +130,7 @@ export default function Testimonials() {
               lineHeight: 1.2,
             }}
           >
-            Lo que dicen nuestros <span style={{ color: '#00B4D8' }}>clientes</span>
+            Lo que dicen nuestros <span style={{ color: '#1565C0' }}>clientes</span>
           </h2>
         </div>
 
@@ -241,7 +241,7 @@ export default function Testimonials() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#00B4D8',
+                color: '#1565C0',
                 transition: 'all 0.2s ease',
               }}
             >
@@ -282,7 +282,7 @@ export default function Testimonials() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#00B4D8',
+                color: '#1565C0',
                 transition: 'all 0.2s ease',
               }}
             >

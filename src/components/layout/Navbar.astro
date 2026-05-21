@@ -11,8 +11,10 @@ import { SITE, SERVICES, ZONES } from '../../lib/seo';
       <img
         src="/images/logo/logo-plomeros-saor.png"
         alt="Plomeros SAOR — Servicios locativos de calidad"
+        width="261"
         height="56"
         loading="eager"
+        fetchpriority="high"
         class="navbar-logo-img"
       />
     </a>
@@ -85,7 +87,7 @@ import { SITE, SERVICES, ZONES } from '../../lib/seo';
   </div>
 
   <!-- Mobile menu -->
-  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true" inert>
     <nav>
       <a href="/" class="mobile-link">Inicio</a>
       <div class="mobile-section-title">Servicios</div>
@@ -419,20 +421,28 @@ import { SITE, SERVICES, ZONES } from '../../lib/seo';
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileMenu   = document.getElementById('mobile-menu');
 
+  function openMenu() {
+    hamburgerBtn?.classList.add('open');
+    mobileMenu?.classList.add('open');
+    hamburgerBtn?.setAttribute('aria-expanded', 'true');
+    mobileMenu?.setAttribute('aria-hidden', 'false');
+    mobileMenu?.removeAttribute('inert');
+  }
+
+  function closeMenu() {
+    hamburgerBtn?.classList.remove('open');
+    mobileMenu?.classList.remove('open');
+    hamburgerBtn?.setAttribute('aria-expanded', 'false');
+    mobileMenu?.setAttribute('aria-hidden', 'true');
+    mobileMenu?.setAttribute('inert', '');
+  }
+
   hamburgerBtn?.addEventListener('click', () => {
-    const isOpen = hamburgerBtn.classList.toggle('open');
-    mobileMenu?.classList.toggle('open', isOpen);
-    hamburgerBtn.setAttribute('aria-expanded', String(isOpen));
-    mobileMenu?.setAttribute('aria-hidden', String(!isOpen));
+    const isOpen = hamburgerBtn.classList.contains('open');
+    isOpen ? closeMenu() : openMenu();
   });
 
-  // Cerrar menú mobile al hacer clic en un link
   mobileMenu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburgerBtn?.classList.remove('open');
-      mobileMenu.classList.remove('open');
-      hamburgerBtn?.setAttribute('aria-expanded', 'false');
-      mobileMenu.setAttribute('aria-hidden', 'true');
-    });
+    link.addEventListener('click', closeMenu);
   });
 </script>

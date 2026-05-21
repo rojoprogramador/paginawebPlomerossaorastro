@@ -59,6 +59,12 @@ const GADS_ID = 'AW-17162213345';
   <meta name="twitter:description" content={description} />
   <meta name="twitter:image"       content={`${SITE.url}${ogImage}`} />
 
+  <!-- Google Fonts — non-blocking (media=print trick) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" /></noscript>
+
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="icon" type="image/x-icon"  href="/favicon.ico" sizes="48x48" />

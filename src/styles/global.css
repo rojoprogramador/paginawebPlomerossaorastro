@@ -3,9 +3,6 @@
    Paleta extraída del logo oficial
    ============================================== */
 
-/* Google Fonts — Sora (headings) + Inter (body) — DEBE ir primero */
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
-
 @import "tailwindcss";
 
 /* ---- Tokens de diseño ---- */
@@ -19,12 +16,12 @@
 
   /* Acentos funcionales */
   --color-orange:    #F97316;   /* emergencias, badges urgentes */
-  --color-green:     #22C55E;   /* botones WhatsApp */
+  --color-green:     #15803d;   /* botones WhatsApp — verde oscuro WCAG AA */
 
   /* Neutros */
   --color-bg-light:  #F0F7FA;   /* fondos alternos de sección */
   --color-text:      #0F172A;   /* texto principal */
-  --color-muted:     #64748B;   /* texto secundario */
+  --color-muted:     #475569;   /* texto secundario — contraste ≥4.5:1 */
   --color-border:    #CBD5E1;   /* bordes sutiles */
 
   /* Tipografía */
@@ -120,24 +117,24 @@ img {
 }
 
 .btn-primary {
-  background: var(--color-brand);
+  background: var(--color-mid-blue);
   color: white;
   box-shadow: var(--shadow-brand);
 }
 .btn-primary:hover {
-  background: var(--color-mid-blue);
+  background: var(--color-navy);
   color: white;
   transform: translateY(-2px);
-  box-shadow: 0 12px 36px rgba(0,180,216,.35);
+  box-shadow: 0 12px 36px rgba(21,101,192,.35);
 }
 
 .btn-secondary {
   background: transparent;
-  color: var(--color-brand);
-  border: 2px solid var(--color-brand);
+  color: var(--color-mid-blue);
+  border: 2px solid var(--color-mid-blue);
 }
 .btn-secondary:hover {
-  background: var(--color-brand);
+  background: var(--color-mid-blue);
   color: white;
   transform: translateY(-2px);
 }
@@ -166,10 +163,10 @@ img {
 .btn-whatsapp {
   background: var(--color-green);
   color: white;
-  box-shadow: 0 4px 16px rgba(34,197,94,.3);
+  box-shadow: 0 4px 16px rgba(21,128,61,.3);
 }
 .btn-whatsapp:hover {
-  background: #16a34a;
+  background: #14532d;
   color: white;
   transform: translateY(-2px);
 }
@@ -226,7 +223,7 @@ img {
 }
 .badge-brand {
   background: rgba(0,180,216,.12);
-  color: var(--color-brand);
+  color: var(--color-navy);
   border: 1px solid rgba(0,180,216,.3);
 }
 .badge-orange {
