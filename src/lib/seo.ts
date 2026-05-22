@@ -71,7 +71,7 @@ export function getLocalBusinessSchema(overrides: Record<string, unknown> = {}) 
     '@context': 'https://schema.org',
     '@type': 'Plumber',
     name: SITE.name,
-    description: 'Plomeros profesionales en Cali con más de 10 años de experiencia. Destape de cañerías, detección de fugas con geófono y cámara térmica, remodelación de baños. Servicio 24 horas.',
+    description: 'Plomeros profesionales en Cali con más de 6 años de experiencia. Destape de cañerías, detección de fugas con geófono y cámara térmica, remodelación de baños. Servicio 24 horas.',
     url: SITE.url,
     telephone: [SITE.phone1, SITE.phone2],
     email: SITE.email,

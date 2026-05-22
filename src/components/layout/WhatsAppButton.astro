@@ -37,23 +37,26 @@ const href = `https://wa.me/${SITE.whatsapp}?text=${MESSAGE}`;
   </a>
 </div>
 
-<script>
-  setTimeout(() => document.getElementById('wa-wrap')?.classList.add('visible'), 2000);
-</script>
-
 <style>
   .wa-wrap {
     position: fixed;
     bottom: 1.75rem;
     right: 1.75rem;
-    z-index: 999;
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 0.4s ease, transform 0.4s ease;
+    z-index: 9999;
+    /* CSS animation — no JS needed, works on iOS */
+    animation: wa-appear 0.4s ease 1.5s both;
   }
-  .wa-wrap.visible {
-    opacity: 1;
-    transform: scale(1);
+
+  @keyframes wa-appear {
+    from { opacity: 0; transform: scale(0.6); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @media (max-width: 640px) {
+    .wa-wrap {
+      bottom: 1rem;
+      right: 0.875rem;
+    }
   }
 
   /* Tooltip */
