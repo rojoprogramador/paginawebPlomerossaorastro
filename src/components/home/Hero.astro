@@ -348,20 +348,15 @@ import imgHero from '../../assets/hero/hero-principal.png';
     .hero-stat-divider { display: none; }
     .hero-stat { border-right: none; }
 
-    /* En mobile: WhatsApp full ancho + Llamar */
+    /* En mobile: WhatsApp y Llamar iguales en 2 columnas */
     .hero-ctas {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0.625rem;
     }
     /* Ocultar el botón Cotizar en mobile — ya está en la navbar y footer */
-    .hero-ctas .hero-btn-cotizar,
-    .hero-ctas a:last-child {
+    .hero-ctas .hero-btn-cotizar {
       display: none;
-    }
-    /* El botón de WhatsApp ocupa toda la fila */
-    .hero-ctas a:first-child {
-      grid-column: 1 / -1;
     }
 
     .hero-trust { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
