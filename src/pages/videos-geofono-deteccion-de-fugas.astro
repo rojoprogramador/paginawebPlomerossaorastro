@@ -1,66 +1,180 @@
 ---
 // src/pages/videos-geofono-deteccion-de-fugas.astro
+export const prerender = true;
 
 import Layout from '../layouts/Layout.astro';
 import Breadcrumb from '../components/shared/Breadcrumb.astro';
 import CTAEmergency from '../components/home/CTAEmergency.astro';
 import { buildTitle, SITE } from '../lib/seo';
+
+// ─────────────────────────────────────────────────────────────
+//  VIDEOS — reemplaza los IDs (parte después de watch?v= en la URL)
+//  Ejemplo: https://www.youtube.com/watch?v=ABC123xyz12 → ID = "ABC123xyz12"
+// ─────────────────────────────────────────────────────────────
+const VIDEOS_PRINCIPALES = [
+  {
+    id:    'ibR1IfAHXzM',
+    title: 'Cazadores de Fugas: Plomeros Cali Usamos Geófono para Localización Precisa',
+    views: '14 K vistas',
+  },
+  {
+    id:    'l2wPAWzIMPc',
+    title: 'Detección de fugas de agua con geófono — Plomeros Cali',
+    views: '6.3 K vistas',
+  },
+  {
+    id:    '6YQHHuqJJsw',
+    title: 'Detección de fugas de agua con geófono — destape de cañerías',
+    views: '2.2 K vistas',
+  },
+  {
+    id:    'rCVXRMGp7y8',
+    title: 'Fugas de Agua invisibles: Plomeros en Cali con Geófono',
+    views: '695 vistas',
+  },
+  {
+    id:    '1GJsYN0TuGo',
+    title: 'Detección de fuga de agua — plomerossaor.com',
+    views: '332 vistas',
+  },
+  {
+    id:    'y5X6136sos0',
+    title: '¡Fugas Nunca Más! Descubre el Poder del Geófono',
+    views: '41 vistas',
+  },
+  {
+    id:    'Lg6RSFJmJZI',
+    title: 'Plomeros SAOR — Detección y reparación de fugas en Cali',
+    views: '',
+  },
+];
+
+const SHORTS = [
+  { id: 'uuE1sf5FYws', title: 'Fugas de agua | Escaneo con Geófono y cámara térmica',  views: '2.3 K vistas' },
+  { id: 'VnGqw8Q-YDk', title: 'Reparación de fuga de agua potable',                     views: '1 K vistas'   },
+  { id: 'KKHQZX0sF-A', title: 'Detección de Fuga de agua — grieta en el tubo',          views: '876 vistas'   },
+  { id: 'NeoSd27TqJ8', title: 'Escaneo con geófono | Fuga de agua',                     views: '355 vistas'   },
+  { id: 'Mmlkkw8Va1I', title: 'Localización de fuga sin romper paredes',                views: ''             },
+  { id: 'DAvbzLMbvxs', title: 'Destape de cañería — Plomeros Cali',                     views: ''             },
+  { id: 's1cShpfmios', title: 'Fuga oculta detectada con geófono',                      views: ''             },
+  { id: 'K9aDzu8b1w8', title: 'Escáner acústico — detección de fugas',                  views: ''             },
+  { id: 'Jlq-ZUIsyss', title: 'Trabajo de plomería en Cali — SAOR',                     views: ''             },
+  { id: 'UHWszioKHws', title: 'Detección de fuga — trabajo real',                       views: ''             },
+  { id: 'x2nAX50hRm0', title: 'Reparación de tubería — Plomeros SAOR',                  views: ''             },
+  { id: 'KPqLKlKDCqU', title: 'Geófono profesional en Cali',                            views: ''             },
+  { id: '1L7dmz7X-JM', title: 'Plomería sin romper — Cali',                             views: ''             },
+  { id: 'dC3mVrEcOhk', title: 'Detección de fuga en piso',                              views: ''             },
+  { id: '7QfXBuRdTBg', title: 'Localización precisa de fuga de agua',                   views: ''             },
+  { id: 'ZyPQlziAAzY', title: 'Plomeros SAOR — servicio rápido Cali',                   views: ''             },
+  { id: 'mimf2jOjiL4', title: 'Geófono en acción — fuga detectada',                     views: ''             },
+  { id: 'xSYuR88XfJw', title: 'Fuga de agua — diagnóstico preciso',                     views: ''             },
+  { id: '1zes03Ua8nU', title: 'Reparación de fuga potable Cali',                        views: ''             },
+  { id: '8p5FkD5AnME', title: 'Escáner de tuberías en Cali',                            views: ''             },
+  { id: '62p-Gbc48Es', title: 'Destape profesional — Plomeros SAOR',                    views: ''             },
+  { id: '0gYz6tsSSUQ', title: 'Detección con tecnología acústica',                      views: ''             },
+  { id: '4OOmxXfHiQ4', title: 'Plomeros en Cali — trabajo verificado',                  views: ''             },
+  { id: 'JIi91vKWSaI', title: 'Geófono y cámara térmica — equipo SAOR',                 views: ''             },
+];
 ---
 
 <Layout
   title={buildTitle('Videos Geófono — Detección de Fugas en Cali · Plomeros SAOR')}
-  description="Videos reales de detección de fugas con geófono y cámara térmica en Cali. Trabajos reales de Plomeros SAOR. Ver cómo trabajamos antes de contratar."
+  description="Videos reales de detección de fugas con geófono y cámara térmica en Cali. Mira cómo trabaja el equipo de Plomeros SAOR antes de contratar. Canal YouTube oficial."
   canonical="/videos-geofono-deteccion-de-fugas"
 >
   <div style="padding-top:68px;" />
 
-  <section style="background:var(--color-navy);padding:3.5rem 0;">
+  <!-- Hero de la sección -->
+  <section class="videos-hero">
     <div class="container">
-      <Breadcrumb items={[{label:'Inicio',href:'/'},{label:'Videos'}]} />
-      <h1 style="font-size:clamp(2rem,4vw,2.75rem);font-weight:800;color:white;line-height:1.15;margin:1rem 0 0.75rem;">
+      <Breadcrumb items={[{label:'Inicio',href:'/'},{label:'Videos geófono'}]} />
+      <div class="videos-hero-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF0000" aria-hidden="true">
+          <path d="M10 15l5.19-3L10 9v6zm11.56-7.83c.25.94.43 2.2.54 3.71L22 12l-.01 1.88c-.09 1.51-.27 2.77-.52 3.71-.46 1.61-1.89 2.9-3.5 3.07C16.68 20.89 14.46 21 12 21c-2.46 0-4.68-.11-6.48-.34-1.61-.17-3.04-1.46-3.5-3.07C1.77 16.65 1.6 15.39 1.5 13.88L1.49 12l.01-1.88c.1-1.51.28-2.77.53-3.71.46-1.61 1.89-2.9 3.5-3.07C7.32 3.11 9.54 3 12 3c2.46 0 4.68.11 6.48.34 1.61.17 3.04 1.46 3.5 3.07h.58z"/>
+        </svg>
+        Canal oficial — @plomerosSaor
+      </div>
+      <h1 class="videos-hero-title">
         Videos Reales — <span style="color:var(--color-brand);">Geófono en Cali</span>
       </h1>
-      <p style="font-size:1rem;color:rgba(255,255,255,0.75);max-width:580px;line-height:1.65;">
-        Mira nuestros trabajos reales de detección de fugas con geófono y cámara térmica en Cali.
-        Verificá cómo trabajamos antes de contratarnos.
+      <p class="videos-hero-sub">
+        Mira cómo detectamos fugas ocultas con geófono y cámara térmica en Cali.
+        Trabajos reales, sin edición. Verifica cómo trabajamos antes de contratarnos.
       </p>
+      <div class="videos-hero-stats">
+        <span>🎬 31 videos</span>
+        <span>👥 188 suscriptores</span>
+        <span>⭐ Especialistas en geófono</span>
+      </div>
     </div>
   </section>
 
+  <!-- Videos principales -->
   <section class="section">
     <div class="container">
-      <!-- Video placeholders -->
-      <!-- VIDEOS PENDIENTES: Agrega tus videos reales aquí
-           Puedes usar videos de YouTube (embed) o archivos mp4 locales
-           Tamaño recomendado: 1280x720px mínimo, formato mp4 -->
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;">
-        {Array.from({length: 6}).map((_, i) => (
-          <div style="background:var(--color-navy);border-radius:var(--radius-xl);overflow:hidden;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(0,180,216,0.3);">
-            <div style="text-align:center;color:rgba(255,255,255,0.5);">
-              <div style="font-size:3rem;margin-bottom:0.5rem;">🎬</div>
-              <p style="font-size:0.8125rem;">Video {i+1}: trabajo real con geófono<br/>
-              <span style="font-size:0.75rem;opacity:0.7;">/videos/geofono-trabajo-{i+1}.mp4</span></p>
+      <h2 class="section-subtitle">Videos más vistos</h2>
+
+      <div class="videos-grid">
+        {VIDEOS_PRINCIPALES.map(v => (
+          <div class="video-card">
+            <div class="video-wrap">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${v.id}?rel=0&modestbranding=1`}
+                title={v.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-title">{v.title}</p>
+              {v.views && <span class="video-views">👁 {v.views}</span>}
             </div>
           </div>
         ))}
       </div>
 
-      <!-- Canal YouTube -->
-      <div style="margin-top:3rem;text-align:center;padding:2.5rem;background:var(--color-bg-light);border-radius:var(--radius-xl);">
+      <!-- Shorts -->
+      <h2 class="section-subtitle" style="margin-top:3.5rem;">Shorts — 24 clips de trabajos reales</h2>
+      <div class="shorts-grid">
+        {SHORTS.map(s => (
+          <div class="video-card">
+            <div class="short-wrap">
+              <iframe
+                src={`https://www.youtube-nocookie.com/embed/${s.id}?rel=0&modestbranding=1`}
+                title={s.title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-title">{s.title}</p>
+              {s.views && <span class="video-views">👁 {s.views}</span>}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- CTA canal -->
+      <div class="canal-cta">
         <div style="font-size:2.5rem;margin-bottom:0.75rem;">▶️</div>
-        <h2 style="font-size:1.375rem;font-weight:800;color:var(--color-navy);margin-bottom:0.5rem;">
-          Ver más videos en YouTube
-        </h2>
-        <p style="color:var(--color-muted);margin-bottom:1.25rem;font-size:0.9375rem;">
-          Suscríbete a nuestro canal para ver todos nuestros trabajos con geófono y cámara térmica en Cali.
+        <h2 class="canal-cta-title">Ver todos los videos en YouTube</h2>
+        <p class="canal-cta-sub">
+          Más de 31 videos de detecciones reales, destapes y remodelaciones en Cali.
+          Suscríbete para ver todos nuestros trabajos.
         </p>
         <a
           href={SITE.youtube}
-          class="btn btn-primary btn-lg"
+          class="btn btn-danger btn-lg"
           target="_blank"
           rel="noopener noreferrer"
+          style="background:#FF0000;color:white;border-color:#FF0000;gap:0.5rem;"
         >
-          Ver canal de YouTube →
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white" aria-hidden="true">
+            <path d="M10 15l5.19-3L10 9v6zm11.56-7.83c.25.94.43 2.2.54 3.71L22 12l-.01 1.88c-.09 1.51-.27 2.77-.52 3.71-.46 1.61-1.89 2.9-3.5 3.07C16.68 20.89 14.46 21 12 21c-2.46 0-4.68-.11-6.48-.34-1.61-.17-3.04-1.46-3.5-3.07C1.77 16.65 1.6 15.39 1.5 13.88L1.49 12l.01-1.88c.1-1.51.28-2.77.53-3.71.46-1.61 1.89-2.9 3.5-3.07C7.32 3.11 9.54 3 12 3c2.46 0 4.68.11 6.48.34 1.61.17 3.04 1.46 3.5 3.07h.58z"/>
+          </svg>
+          Ir al canal de YouTube
         </a>
       </div>
     </div>
@@ -68,3 +182,179 @@ import { buildTitle, SITE } from '../lib/seo';
 
   <CTAEmergency />
 </Layout>
+
+<style>
+  /* Hero */
+  .videos-hero {
+    background: var(--color-navy);
+    padding: 3.5rem 0 4rem;
+  }
+
+  .videos-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,0,0,0.15);
+    border: 1px solid rgba(255,0,0,0.3);
+    color: #ff6b6b;
+    padding: 0.3rem 1rem;
+    border-radius: 99px;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  .videos-hero-title {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 800;
+    color: white;
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+  }
+
+  .videos-hero-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 600px;
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+  }
+
+  .videos-hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 1.75rem;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  /* Section subtitle */
+  .section-subtitle {
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 1.5rem;
+  }
+
+  /* Grid videos principales (16:9) */
+  .videos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .video-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0,180,216,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .video-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(11,34,64,0.12);
+  }
+
+  /* Wrapper 16:9 para videos normales */
+  .video-wrap {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Wrapper 9:16 para Shorts */
+  .short-wrap {
+    position: relative;
+    padding-bottom: 177.78%; /* 9:16 → 100/(9/16) */
+    height: 0;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .short-wrap iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-info {
+    padding: 0.875rem 1rem;
+  }
+
+  .video-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    line-height: 1.4;
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .video-views {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  /* Grid Shorts (9:16 → columnas más estrechas) */
+  .shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* CTA canal */
+  .canal-cta {
+    margin-top: 4rem;
+    text-align: center;
+    padding: 3rem 2rem;
+    background: var(--color-bg-light);
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(0,180,216,0.1);
+  }
+
+  .canal-cta-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .canal-cta-sub {
+    color: var(--color-muted);
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .videos-grid { grid-template-columns: repeat(2, 1fr); }
+    .shorts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .videos-grid { grid-template-columns: 1fr; }
+    .shorts-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
